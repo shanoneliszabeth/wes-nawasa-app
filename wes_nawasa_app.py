@@ -146,6 +146,20 @@ api_key_input = st.sidebar.text_input(
 if not api_key_input:
     api_key_input = secrets_key or env_key or ""
 
+key_source = ""
+if api_key_input:
+    if secrets_key and api_key_input == secrets_key:
+        key_source = "Streamlit Secrets"
+    elif env_key and api_key_input == env_key:
+        key_source = "Environment variable"
+    else:
+        key_source = "Sidebar input"
+else:
+    key_source = "None"
+
+if key_source != "None":
+    st.sidebar.caption(f"🔐 Key source: {key_source}")
+
 user_mode = st.sidebar.radio(
     "I am a...",
     ["Customer", "Field Worker"],
