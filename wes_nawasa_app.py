@@ -124,7 +124,7 @@ Operational rules:
 # ---------------------------------------------------------------------------
 st.sidebar.title("💧 W.E.S. Settings")
 
-# Prefer environment variable, then Streamlit secrets, then empty
+# Prefer environment variable, then Streamlit secrets, then empty.
 # Do NOT pre-fill the sidebar input with the secret (prevents exposure).
 env_key = os.environ.get("GEMINI_API_KEY")
 secrets_key = None
@@ -139,16 +139,12 @@ api_key_input = st.sidebar.text_input(
     "Gemini API Key",
     value="",
     type="password",
-    help="Get a key at https://aistudio.google.com/. Never hardcode this in source files.",
+    help="Enter a Gemini API key here, or leave blank to use Streamlit Secrets / environment variable.",
 )
 
-# Use the secret or env var if available, but do not expose them in the UI.
-if secrets_key:
-    api_key_input = secrets_key
-elif env_key:
-    api_key_input = env_key
-
-# (Diagnostic removed)
+# Only use the secret/env key if the user did not type one.
+if not api_key_input:
+    api_key_input = secrets_key or env_key or ""
 
 user_mode = st.sidebar.radio(
     "I am a...",
