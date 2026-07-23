@@ -275,4 +275,19 @@ if prompt:
                     {"role": "assistant", "content": bot_reply})
 
             except Exception as e:
-                st.error(f"Error communicating with Gemini: {e}")
+                error_message = str(e)
+                retry_hint = ""
+                if hasattr(e, "error") and isinstance(e.error, dict):
+                    err = e.error
+                    error_message = err.get("message", error_message)
+                    for detail in err.get("details", []):
+                        if isinstance(detail, dict) and detail.get("@type", "").endswith("RetryInfo"):
+                            retry_delay = detail.get("retryDelay")
+                            if retry_delay:
+                                retry_hint = f" Please retry after {retry_delay}."
+                elif "RESOURCE_EXHAUSTED" in error_message or "quota" in error_message.lower():
+                    error_message = (
+                        "Gemini quota exceeded. Please check your Google Cloud AI quota and billing details, "
+                        "or wait before retrying."
+                    )
+                st.error(f"Gemini request failed: {error_message}{retry_hint}")
