@@ -124,9 +124,12 @@ Operational rules:
 # ---------------------------------------------------------------------------
 st.sidebar.title("💧 W.E.S. Settings")
 
+# Prefer environment variable, then Streamlit secrets, then empty
+default_api_key = os.environ.get("GEMINI_API_KEY") or st.secrets.get("GEMINI_API_KEY", "") if hasattr(st, "secrets") else os.environ.get("GEMINI_API_KEY", "")
+
 api_key_input = st.sidebar.text_input(
     "Gemini API Key",
-    value=os.environ.get("GEMINI_API_KEY", ""),
+    value=default_api_key,
     type="password",
     help="Get a key at https://aistudio.google.com/. Never hardcode this in source files.",
 )
