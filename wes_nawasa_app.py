@@ -125,7 +125,15 @@ Operational rules:
 st.sidebar.title("💧 W.E.S. Settings")
 
 # Prefer environment variable, then Streamlit secrets, then empty
-default_api_key = os.environ.get("GEMINI_API_KEY") or st.secrets.get("GEMINI_API_KEY", "") if hasattr(st, "secrets") else os.environ.get("GEMINI_API_KEY", "")
+default_api_key = None
+env_key = os.environ.get("GEMINI_API_KEY")
+secrets_key = None
+if hasattr(st, "secrets"):
+    try:
+        secrets_key = st.secrets.get("GEMINI_API_KEY")
+    except Exception:
+        secrets_key = None
+default_api_key = env_key or secrets_key or ""
 
 api_key_input = st.sidebar.text_input(
     "Gemini API Key",
@@ -133,6 +141,16 @@ api_key_input = st.sidebar.text_input(
     type="password",
     help="Get a key at https://aistudio.google.com/. Never hardcode this in source files.",
 )
+
+# Diagnostic (does NOT show the key): indicate where the app found a key
+has_env = bool(env_key)
+has_secrets = bool(secrets_key)
+if has_secrets:
+    st.sidebar.success("Gemini API Key: found in Streamlit Secrets")
+elif has_env:
+    st.sidebar.info("Gemini API Key: found in environment variable")
+else:
+    st.sidebar.warning("Gemini API Key: not found in environment or Streamlit Secrets")
 
 user_mode = st.sidebar.radio(
     "I am a...",
