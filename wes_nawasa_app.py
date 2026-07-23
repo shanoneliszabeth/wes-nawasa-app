@@ -142,15 +142,7 @@ api_key_input = st.sidebar.text_input(
     help="Get a key at https://aistudio.google.com/. Never hardcode this in source files.",
 )
 
-# Diagnostic (does NOT show the key): indicate where the app found a key
-has_env = bool(env_key)
-has_secrets = bool(secrets_key)
-if has_secrets:
-    st.sidebar.success("Gemini API Key: found in Streamlit Secrets")
-elif has_env:
-    st.sidebar.info("Gemini API Key: found in environment variable")
-else:
-    st.sidebar.warning("Gemini API Key: not found in environment or Streamlit Secrets")
+# (Diagnostic removed)
 
 user_mode = st.sidebar.radio(
     "I am a...",
