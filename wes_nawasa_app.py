@@ -17,6 +17,8 @@ Never hardcode API keys directly in source files.
 """
 
 import os
+import base64
+from pathlib import Path
 import streamlit as st
 from google import genai
 from google.genai import types
@@ -397,11 +399,14 @@ if st.sidebar.button(t("sidebar_clear_chat")):
 # ---------------------------------------------------------------------------
 # App Title & Layout
 # ---------------------------------------------------------------------------
-logo_path = "logo.png"
-logo_exists = os.path.exists(logo_path)
+app_dir = Path(__file__).resolve().parent
+logo_path = app_dir / "logo.png"
+logo_exists = logo_path.exists()
 
 if logo_exists:
-    st.image(logo_path, width=110, output_format="PNG")
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image(str(logo_path), width=110)
 
 st.markdown(
     f"""
