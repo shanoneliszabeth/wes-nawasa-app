@@ -61,11 +61,11 @@ TRANSLATIONS = {
         ),
         "faq_title": "Frequently Asked Questions",
         "faq_intro": "Common NAWASA questions and answers about new service connections, billing, leaks, and disconnection.",
-        "faq_apply_new_connection": "Fill out an application for new service connection, per the Requirements for Private Water Service and the Terms and Conditions for Water Service.",
-        "faq_connection_cost": "Based on pipe size — $75 (½\" main), $125 (¾\" main), $175 (1\" main), $420 (1¼\"–2\" main), or $1,000 (4\" main) — plus variable costs like transportation, pipes/fittings, and VAT.",
-        "faq_high_consumption": "Could be estimated bills, a leak, an unsecured/accessible tap, or a faulty meter. To check for a leak: turn off all taps, then watch the meter dial — if it's still turning, there is likely a leak.",
-        "faq_estimated_bills": "Estimated bills are calculated from an average of the customer's last three months' consumption.",
-        "faq_disconnection": "NAWASA may disconnect service at the customer's request, for non-payment of arrears, for wastage/abuse, or for illegal tampering with meters or fittings. Minimum disconnection threshold: $50 in arrears and at least 30 days overdue.",
+        "faq_apply_new_connection": "You'll need to fill out an application for a new service connection. Please review the Requirements for Private Water Service and the Terms and Conditions for Water Service before applying.",
+        "faq_connection_cost": "The cost depends on your pipe size: $75 for a ½\" main, $125 for ¾\", $175 for 1\", $420 for 1¼\"–2\", or $1,000 for a 4\" main — plus variable costs such as transportation, pipes/fittings, and VAT.",
+        "faq_high_consumption": "High consumption can come from estimated bills, a leak, an unsecured or easily accessible tap, or a faulty meter. To check for a leak: turn off all taps, then watch the meter dial — if it's still turning, there's a leak somewhere on the property.",
+        "faq_estimated_bills": "Estimated bills are calculated using an average of your last three months' consumption.",
+        "faq_disconnection": "Service may be disconnected at the customer's request, for non-payment of arrears, for wastage or abuse, or for illegal tampering with meters or fittings. The minimum threshold for disconnection due to arrears is $50, once that amount is at least 30 days overdue.",
         "quota_error": (
             "I'm getting more requests than I can handle right now (we've hit today's free usage limit). "
             "Please try again in a little while, or contact NAWASA directly at 440-2155 for immediate help. "
@@ -318,48 +318,6 @@ st.markdown(
         background-color: {NAVY};
         color: {WHITE};
     }}
-    .wes-faq {{
-        margin-bottom: 1.5rem;
-    }}
-    .wes-faq h2 {{
-        margin: 0 0 0.5rem 0;
-        color: {NAVY};
-        font-size: 1.25rem;
-    }}
-    .wes-faq p {{
-        color: {NAVY};
-        margin: 0 0 1rem 0;
-        font-size: 0.95rem;
-    }}
-    .wes-faq-container {{
-        display: flex;
-        flex-wrap: nowrap;
-        gap: 1rem;
-        overflow-x: auto;
-        padding-bottom: 0.5rem;
-        margin-top: 0.5rem;
-    }}
-    .wes-faq-card {{
-        min-width: 280px;
-        max-width: 380px;
-        background-color: {WHITE};
-        color: {NAVY};
-        border-radius: 14px;
-        padding: 1rem;
-        box-shadow: 0 8px 24px rgba(8, 48, 74, 0.08);
-        border: 1px solid rgba(8, 48, 74, 0.08);
-        flex: 0 0 auto;
-    }}
-    .wes-faq-card strong {{
-        display: block;
-        margin-bottom: 0.6rem;
-        font-size: 1rem;
-    }}
-    .wes-faq-card p {{
-        margin: 0;
-        line-height: 1.5;
-        font-size: 0.95rem;
-    }}
     </style>
     """,
     unsafe_allow_html=True,
@@ -444,32 +402,6 @@ st.markdown(
     <div class="wes-header">
         <h1>💧 {t('page_title')}</h1>
         <p>{t('page_subtitle', territory=territory, mode=mode_label)}</p>
-    </div>
-    <div class="wes-faq">
-        <h2>{t('faq_title')}</h2>
-        <p>{t('faq_intro')}</p>
-        <div class="wes-faq-container">
-            <div class="wes-faq-card">
-                <strong>How do I apply for a new connection?</strong>
-                <p>{t('faq_apply_new_connection')}</p>
-            </div>
-            <div class="wes-faq-card">
-                <strong>What is the cost of a new connection?</strong>
-                <p>{t('faq_connection_cost')}</p>
-            </div>
-            <div class="wes-faq-card">
-                <strong>My water consumption is too high — what could be the problem?</strong>
-                <p>{t('faq_high_consumption')}</p>
-            </div>
-            <div class="wes-faq-card">
-                <strong>How are estimated bills calculated?</strong>
-                <p>{t('faq_estimated_bills')}</p>
-            </div>
-            <div class="wes-faq-card">
-                <strong>Under what circumstances does NAWASA disconnect water service?</strong>
-                <p>{t('faq_disconnection')}</p>
-            </div>
-        </div>
     </div>
     """,
     unsafe_allow_html=True,
