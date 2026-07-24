@@ -21,7 +21,7 @@ import streamlit as st
 from google import genai
 from google.genai import types
 
-LANGUAGES = ["English", "Spanish", "French", "Kreyòl"]
+LANGUAGES = ["English", "Spanish", "French", "Kreyòl", "Chinese"]
 
 TRANSLATIONS = {
     "English": {
@@ -49,6 +49,7 @@ TRANSLATIONS = {
         "customer_mode_note": "Note: This user is a customer.",
         "territory_note": "Note: The user is asking specifically regarding {territory}.",
         "retry_hint": " Please retry after {retry_delay}.",
+        "assistant_language_instruction": "Always answer the user's messages in English.",
         "greeting_customer": (
             "Hello! I'm W.E.S., your NAWASA assistant for {territory}. "
             "How can I help you with your water services today?"
@@ -90,6 +91,7 @@ TRANSLATIONS = {
         "customer_mode_note": "Nota: Este usuario es un cliente.",
         "territory_note": "Nota: El usuario está consultando específicamente sobre {territory}.",
         "retry_hint": " Por favor, vuelva a intentarlo después de {retry_delay}.",
+        "assistant_language_instruction": "Responda siempre a los mensajes del usuario en español.",
         "greeting_customer": (
             "¡Hola! Soy W.E.S., tu asistente de NAWASA para {territory}. "
             "¿Cómo puedo ayudarte con tus servicios de agua hoy?"
@@ -131,6 +133,7 @@ TRANSLATIONS = {
         "customer_mode_note": "Remarque : Cet utilisateur est un client.",
         "territory_note": "Remarque : L'utilisateur demande spécifiquement concernant {territory}.",
         "retry_hint": " Veuillez réessayer après {retry_delay}.",
+        "assistant_language_instruction": "Répondez toujours aux messages de l'utilisateur en français.",
         "greeting_customer": (
             "Bonjour ! Je suis W.E.S., votre assistant NAWASA pour {territory}. "
             "Comment puis-je vous aider avec vos services d'eau aujourd'hui ?"
@@ -172,6 +175,7 @@ TRANSLATIONS = {
         "customer_mode_note": "Remak: Itilizatè sa a se yon kliyan.",
         "territory_note": "Remak: Itilizatè a ap mande espesyalman sou {territory}.",
         "retry_hint": " Tanpri re-eseye apre {retry_delay}.",
+        "assistant_language_instruction": "Toujou reponn mesaj itilizatè a an Kreyòl.",
         "greeting_customer": (
             "Bonjou! Mwen se W.E.S., asistan NAWASA ou pou {territory}. "
             "Kijan mwen ka ede w ak sèvis dlo ou jodi a?"
@@ -187,6 +191,48 @@ TRANSLATIONS = {
             "Kòd referans ou : {ref_code}"
         ),
         "gemini_error": "Rekèt Gemini a echwe : {error}{retry_hint}",
+    },
+    "Chinese": {
+        "page_title": "W.E.S. - NAWASA 助手",
+        "page_subtitle": "为 {territory} 服务 · 国家水务与污水管理局 · 模式：{mode}",
+        "sidebar_title": "💧 W.E.S. 设置",
+        "sidebar_language": "语言",
+        "sidebar_api_key_label": "Gemini API 密钥",
+        "sidebar_api_key_help": (
+            "在此输入您个人的 Gemini API 密钥。"
+            "此应用不再使用共享密钥或 Streamlit Secrets，"
+            "因此每位访客都必须提供自己的密钥。"
+        ),
+        "sidebar_i_am_a": "我是...",
+        "customer": "客户",
+        "field_worker": "现场工作人员",
+        "sidebar_select_territory": "选择地区",
+        "sidebar_clear_chat": "清除聊天",
+        "api_key_required": "请在侧边栏中输入您的 Gemini API 密钥以开始聊天。",
+        "chat_input_placeholder": "在此输入您的消息...",
+        "field_worker_upload": "上传水表或水箱仪表的照片",
+        "auto_read_prompt": "请读取我上传的照片中的水表/水箱读数。",
+        "thinking_spinner": "W.E.S. 正在思考...",
+        "field_worker_mode_note": "注意：该用户为 NAWASA 的现场工作人员，处于现场工作人员模式。",
+        "customer_mode_note": "注意：该用户为客户。",
+        "territory_note": "注意：用户正在询问关于 {territory} 的问题。",
+        "retry_hint": " 请在 {retry_delay} 后重试。",
+        "assistant_language_instruction": "始终用中文回复用户的消息。",
+        "greeting_customer": (
+            "您好！我是 W.E.S.，您在 {territory} 的 NAWASA 助手。"
+            "我今天如何帮助您处理水务服务问题？"
+        ),
+        "greeting_field_worker": (
+            "您好！我是 W.E.S. — {territory} 的现场工作人员模式。"
+            "请上传水表或水箱仪表的照片，我会读取数值，"
+            "或者您也可以询问我有关 NAWASA 运营的其他问题。"
+        ),
+        "quota_error": (
+            "我现在收到的请求太多，无法处理（我们已达到今天的免费使用上限）。"
+            "请稍后再试，或直接致电 NAWASA 440-2155 获取即时帮助。"
+            "您的参考代码：{ref_code}"
+        ),
+        "gemini_error": "Gemini 请求失败：{error}{retry_hint}",
     },
 }
 
@@ -418,10 +464,13 @@ if prompt:
                         else f"\n{t('customer_mode_note')}"
                     )
 
+                    language_instruction = t("assistant_language_instruction")
+
                     config = types.GenerateContentConfig(
                         system_instruction=SYSTEM_INSTRUCTION
                         + f"\n{t('territory_note', territory=territory)}"
-                        + mode_note,
+                        + mode_note
+                        + f"\n{language_instruction}",
                         temperature=0.7,
                     )
 
