@@ -124,41 +124,14 @@ Operational rules:
 # ---------------------------------------------------------------------------
 st.sidebar.title("💧 W.E.S. Settings")
 
-# Prefer environment variable, then Streamlit secrets, then empty.
-# Do NOT pre-fill the sidebar input with the secret (prevents exposure).
-env_key = os.environ.get("GEMINI_API_KEY")
-secrets_key = None
-if hasattr(st, "secrets"):
-    try:
-        secrets_key = st.secrets.get("GEMINI_API_KEY")
-    except Exception:
-        secrets_key = None
-
-# Leave the input empty so the key remains hidden unless the user types it.
+# Do NOT use Streamlit Secrets or environment variables for the Gemini key.
+# Every user must provide their own API key in the sidebar.
 api_key_input = st.sidebar.text_input(
     "Gemini API Key",
     value="",
     type="password",
-    help="Enter a Gemini API key here, or leave blank to use Streamlit Secrets / environment variable.",
+    help="Enter your own Gemini API key here. Do not share it in the app with others.",
 )
-
-# Only use the secret/env key if the user did not type one.
-if not api_key_input:
-    api_key_input = secrets_key or env_key or ""
-
-key_source = ""
-if api_key_input:
-    if secrets_key and api_key_input == secrets_key:
-        key_source = "Streamlit Secrets"
-    elif env_key and api_key_input == env_key:
-        key_source = "Environment variable"
-    else:
-        key_source = "Sidebar input"
-else:
-    key_source = "None"
-
-if key_source != "None":
-    st.sidebar.caption(f"🔐 Key source: {key_source}")
 
 user_mode = st.sidebar.radio(
     "I am a...",
