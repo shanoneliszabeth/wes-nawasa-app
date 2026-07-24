@@ -73,6 +73,14 @@ TRANSLATIONS = {
         "faq_deposit_reconnection": "Deposits: Domestic $240, Non-domestic $340. Reconnection fees: Domestic $75, Non-domestic $150.",
         "faq_billing_terms": "Bills are due within 30 days of issue. Late amounts accrue 1% interest per month, and service may be discontinued after 30+ days overdue.",
         "faq_leak_check": "To self-check for a leak: turn off all taps and appliances, watch the meter. If it keeps moving, report a leak; if it stops, the issue is likely an estimated bill, an outdoor tap, or a meter problem.",
+        "faq_apply_new_connection_header": "How do I apply for a new service connection?",
+        "faq_connection_header": "How much does a new service connection cost?",
+        "faq_contact_header": "How can I contact NAWASA for help?",
+        "faq_deposit_header": "What are deposit and reconnection fees?",
+        "faq_billing_header": "What are NAWASA billing terms and late charges?",
+        "faq_leak_header": "How do I check whether I have a leak?",
+        "faq_high_consumption_header": "Why is my water usage high and how can I check for leaks?",
+        "faq_fee_conflict_header": "What if published connection fees conflict?",
         "quota_error": (
             "I'm getting more requests than I can handle right now (we've hit today's free usage limit). "
             "Please try again in a little while, or contact NAWASA directly at 440-2155 for immediate help. "
@@ -479,22 +487,31 @@ st.markdown(
 )
 
 with st.expander(t("faq_title"), expanded=True):
-    st.markdown(
-        f"""
-        <p>{t('faq_intro')}</p>
-        <ul>
-            <li>{t('faq_contact')}</li>
-            <li>{t('faq_apply_new_connection')}</li>
-            <li>{t('faq_connection_cost')}</li>
-            <li>{t('faq_fee_conflict')}</li>
-            <li>{t('faq_deposit_reconnection')}</li>
-            <li>{t('faq_billing_terms')}</li>
-            <li>{t('faq_high_consumption')}</li>
-            <li>{t('faq_leak_check')}</li>
-        </ul>
-        """,
-        unsafe_allow_html=True,
-    )
+    st.markdown(f"<p>{t('faq_intro')}</p>", unsafe_allow_html=True)
+
+    with st.expander(t("faq_contact_header")):
+        st.write(t("faq_contact"))
+
+    with st.expander(t("faq_apply_new_connection_header")):
+        st.write(t("faq_apply_new_connection"))
+
+    with st.expander(t("faq_connection_header")):
+        st.write(t("faq_connection_cost"))
+
+    with st.expander(t("faq_fee_conflict_header")):
+        st.write(t("faq_fee_conflict"))
+
+    with st.expander(t("faq_deposit_header")):
+        st.write(t("faq_deposit_reconnection"))
+
+    with st.expander(t("faq_billing_header")):
+        st.write(t("faq_billing_terms"))
+
+    with st.expander(t("faq_high_consumption_header")):
+        st.write(t("faq_high_consumption"))
+
+    with st.expander(t("faq_leak_header")):
+        st.write(t("faq_leak_check"))
 
 if not api_key_input:
     st.info(t("api_key_required"), icon="🔑")
