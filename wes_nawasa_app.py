@@ -397,15 +397,33 @@ if st.sidebar.button(t("sidebar_clear_chat")):
 # ---------------------------------------------------------------------------
 # App Title & Layout
 # ---------------------------------------------------------------------------
-st.markdown(
-    f"""
-    <div class="wes-header">
-        <h1>💧 {t('page_title')}</h1>
-        <p>{t('page_subtitle', territory=territory, mode=mode_label)}</p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+logo_path = "logo.png"
+logo_exists = os.path.exists(logo_path)
+
+if logo_exists:
+    col1, col2 = st.columns([1, 5])
+    with col1:
+        st.image(logo_path, width=110)
+    with col2:
+        st.markdown(
+            f"""
+            <div class="wes-header">
+                <h1>💧 {t('page_title')}</h1>
+                <p>{t('page_subtitle', territory=territory, mode=mode_label)}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+else:
+    st.markdown(
+        f"""
+        <div class="wes-header">
+            <h1>💧 {t('page_title')}</h1>
+            <p>{t('page_subtitle', territory=territory, mode=mode_label)}</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 if not api_key_input:
     st.info(t("api_key_required"), icon="🔑")
