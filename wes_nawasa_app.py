@@ -130,7 +130,11 @@ api_key_input = st.sidebar.text_input(
     "Gemini API Key",
     value="",
     type="password",
-    help="Enter your own Gemini API key here. Do not share it in the app with others.",
+    help=(
+        "Enter your personal Gemini API key here. "
+        "This app no longer uses a shared key or Streamlit Secrets, "
+        "so every visitor must provide their own key."
+    ),
 )
 
 user_mode = st.sidebar.radio(
