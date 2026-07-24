@@ -23,7 +23,17 @@ import streamlit as st
 from google import genai
 from google.genai import types
 
-LANGUAGES = ["English", "Spanish", "French", "Kreyòl", "Chinese"]
+LANGUAGES = [
+    "English",
+    "Spanish",
+    "French",
+    "Kreyòl",
+    "Chinese",
+    "Português",
+    "Hindi",
+    "Arabic",
+    "Bengali",
+]
 
 TRANSLATIONS = {
     "English": {
@@ -418,12 +428,9 @@ Operational rules:
 # ---------------------------------------------------------------------------
 # Sidebar controls
 # ---------------------------------------------------------------------------
-# The language selector must initialize before translations are available.
-language = st.sidebar.radio(
-    TRANSLATIONS["English"]["sidebar_language"],
-    LANGUAGES,
-    index=0,
-)
+# Use a hidden expander so the sidebar only shows the language label until clicked.
+with st.sidebar.expander(TRANSLATIONS["English"]["sidebar_language"], expanded=False):
+    language = st.selectbox("", LANGUAGES, index=0)
 
 st.sidebar.title(t("sidebar_title"))
 
