@@ -21,6 +21,180 @@ import streamlit as st
 from google import genai
 from google.genai import types
 
+LANGUAGES = ["English", "Spanish", "French", "Kreyòl"]
+
+TRANSLATIONS = {
+    "English": {
+        "page_title": "W.E.S. - NAWASA Assist",
+        "page_subtitle": "Serving {territory} · National Water & Sewerage Authority · Mode: {mode}",
+        "sidebar_title": "💧 W.E.S. Settings",
+        "sidebar_language": "Language",
+        "sidebar_api_key_label": "Gemini API Key",
+        "sidebar_api_key_help": (
+            "Enter your personal Gemini API key here. "
+            "This app no longer uses a shared key or Streamlit Secrets, "
+            "so every visitor must provide their own key."
+        ),
+        "sidebar_i_am_a": "I am a...",
+        "customer": "Customer",
+        "field_worker": "Field Worker",
+        "sidebar_select_territory": "Select Territory",
+        "sidebar_clear_chat": "Clear Chat",
+        "api_key_required": "Please enter your Gemini API key in the sidebar to start chatting.",
+        "chat_input_placeholder": "Type your message here...",
+        "field_worker_upload": "Upload a photo of a water meter or tank gauge",
+        "auto_read_prompt": "Please read the meter/tank value from the photo I uploaded.",
+        "thinking_spinner": "W.E.S. is thinking...",
+        "field_worker_mode_note": "Note: This user is a NAWASA field worker in Field Worker mode.",
+        "customer_mode_note": "Note: This user is a customer.",
+        "territory_note": "Note: The user is asking specifically regarding {territory}.",
+        "retry_hint": " Please retry after {retry_delay}.",
+        "greeting_customer": (
+            "Hello! I'm W.E.S., your NAWASA assistant for {territory}. "
+            "How can I help you with your water services today?"
+        ),
+        "greeting_field_worker": (
+            "Hello! I'm W.E.S. — Field Worker mode for {territory}. "
+            "Upload a photo of a water meter or tank gauge below and I'll read the value for you, "
+            "or ask me anything else about NAWASA operations."
+        ),
+        "quota_error": (
+            "I'm getting more requests than I can handle right now (we've hit today's free usage limit). "
+            "Please try again in a little while, or contact NAWASA directly at 440-2155 for immediate help. "
+            "Your reference code: {ref_code}"
+        ),
+        "gemini_error": "Gemini request failed: {error}{retry_hint}",
+    },
+    "Spanish": {
+        "page_title": "W.E.S. - Asistente de NAWASA",
+        "page_subtitle": "Sirviendo a {territory} · Autoridad Nacional de Agua y Alcantarillado · Modo: {mode}",
+        "sidebar_title": "💧 Configuración W.E.S.",
+        "sidebar_language": "Idioma",
+        "sidebar_api_key_label": "Clave API de Gemini",
+        "sidebar_api_key_help": (
+            "Ingrese su clave API personal de Gemini aquí. "
+            "Esta aplicación ya no usa una clave compartida ni Streamlit Secrets, "
+            "así que cada visitante debe proporcionar su propia clave."
+        ),
+        "sidebar_i_am_a": "Soy un...",
+        "customer": "Cliente",
+        "field_worker": "Trabajador de campo",
+        "sidebar_select_territory": "Seleccionar territorio",
+        "sidebar_clear_chat": "Borrar chat",
+        "api_key_required": "Ingrese su clave API de Gemini en la barra lateral para comenzar a chatear.",
+        "chat_input_placeholder": "Escribe tu mensaje aquí...",
+        "field_worker_upload": "Cargue una foto de un medidor de agua o un indicador de tanque",
+        "auto_read_prompt": "Por favor, lea el valor del medidor/reservorio de la foto que cargué.",
+        "thinking_spinner": "W.E.S. está pensando...",
+        "field_worker_mode_note": "Nota: Este usuario es un trabajador de campo de NAWASA en modo Trabajador de campo.",
+        "customer_mode_note": "Nota: Este usuario es un cliente.",
+        "territory_note": "Nota: El usuario está consultando específicamente sobre {territory}.",
+        "retry_hint": " Por favor, vuelva a intentarlo después de {retry_delay}.",
+        "greeting_customer": (
+            "¡Hola! Soy W.E.S., tu asistente de NAWASA para {territory}. "
+            "¿Cómo puedo ayudarte con tus servicios de agua hoy?"
+        ),
+        "greeting_field_worker": (
+            "¡Hola! Estoy en modo Trabajador de campo para {territory}. "
+            "Cargue una foto de un medidor de agua o un indicador de tanque a continuación y leeré el valor para usted, "
+            "o pregúnteme cualquier otra cosa sobre las operaciones de NAWASA."
+        ),
+        "quota_error": (
+            "Estoy recibiendo más solicitudes de las que puedo manejar en este momento (hemos alcanzado el límite de uso gratuito de hoy). "
+            "Por favor, inténtelo de nuevo en un rato, o comuníquese con NAWASA directamente al 440-2155 para obtener ayuda inmediata. "
+            "Su código de referencia: {ref_code}"
+        ),
+        "gemini_error": "La solicitud de Gemini falló: {error}{retry_hint}",
+    },
+    "French": {
+        "page_title": "W.E.S. - Assistant NAWASA",
+        "page_subtitle": "Au service de {territory} · Autorité Nationale de l'Eau et des Égouts · Mode : {mode}",
+        "sidebar_title": "💧 Paramètres W.E.S.",
+        "sidebar_language": "Langue",
+        "sidebar_api_key_label": "Clé API Gemini",
+        "sidebar_api_key_help": (
+            "Entrez votre clé API Gemini personnelle ici. "
+            "Cette application n'utilise plus de clé partagée ni de Streamlit Secrets, "
+            "donc chaque visiteur doit fournir sa propre clé."
+        ),
+        "sidebar_i_am_a": "Je suis un...",
+        "customer": "Client",
+        "field_worker": "Agent de terrain",
+        "sidebar_select_territory": "Sélectionner le territoire",
+        "sidebar_clear_chat": "Effacer le chat",
+        "api_key_required": "Veuillez entrer votre clé API Gemini dans la barre latérale pour commencer à discuter.",
+        "chat_input_placeholder": "Tapez votre message ici...",
+        "field_worker_upload": "Téléchargez une photo d'un compteur d'eau ou d'un indicateur de réservoir",
+        "auto_read_prompt": "Veuillez lire la valeur du compteur/réservoir à partir de la photo que j'ai téléchargée.",
+        "thinking_spinner": "W.E.S. réfléchit...",
+        "field_worker_mode_note": "Remarque : Cet utilisateur est un agent de terrain de NAWASA en mode Agent de terrain.",
+        "customer_mode_note": "Remarque : Cet utilisateur est un client.",
+        "territory_note": "Remarque : L'utilisateur demande spécifiquement concernant {territory}.",
+        "retry_hint": " Veuillez réessayer après {retry_delay}.",
+        "greeting_customer": (
+            "Bonjour ! Je suis W.E.S., votre assistant NAWASA pour {territory}. "
+            "Comment puis-je vous aider avec vos services d'eau aujourd'hui ?"
+        ),
+        "greeting_field_worker": (
+            "Bonjour ! Je suis en mode Agent de terrain pour {territory}. "
+            "Téléchargez une photo d'un compteur d'eau ou d'un indicateur de réservoir ci-dessous et je lirai la valeur pour vous, "
+            "ou posez-moi toute autre question sur les opérations de NAWASA."
+        ),
+        "quota_error": (
+            "Je reçois plus de demandes que je ne peux en traiter en ce moment (nous avons atteint la limite d'utilisation gratuite d'aujourd'hui). "
+            "Veuillez réessayer dans un petit moment, ou contactez NAWASA directement au 440-2155 pour une aide immédiate. "
+            "Votre code de référence : {ref_code}"
+        ),
+        "gemini_error": "La requête Gemini a échoué : {error}{retry_hint}",
+    },
+    "Kreyòl": {
+        "page_title": "W.E.S. - Asistan NAWASA",
+        "page_subtitle": "Sèvi {territory} · Otorite Nasyonal Dlo ak Egou · Mòd : {mode}",
+        "sidebar_title": "💧 Anviwònman W.E.S.",
+        "sidebar_language": "Lang",
+        "sidebar_api_key_label": "Kle API Gemini",
+        "sidebar_api_key_help": (
+            "Antre kle API Gemini pèsonèl ou isit la. "
+            "Aplikasyon sa a pa itilize kle pataje ni Streamlit Secrets ankò, "
+            "kidonk chak vizitè dwe bay pwòp kle yo."
+        ),
+        "sidebar_i_am_a": "Mwen se yon...",
+        "customer": "Kliyan",
+        "field_worker": "Travayè sou teren",
+        "sidebar_select_territory": "Chwazi teritwa",
+        "sidebar_clear_chat": "Efase chat",
+        "api_key_required": "Tanpri antre kle API Gemini ou nan ba bò a pou kòmanse chat la.",
+        "chat_input_placeholder": "Ekri mesaj ou isit la...",
+        "field_worker_upload": "Telechaje yon foto yon kontè dlo oswa yon endikatè rezèvwa",
+        "auto_read_prompt": "Tanpri li valè kontè/rezèvwa a nan foto mwen telechaje a.",
+        "thinking_spinner": "W.E.S. ap panse...",
+        "field_worker_mode_note": "Remak: Itilizatè sa a se yon travayè sou teren NAWASA nan mòd Travayè sou teren.",
+        "customer_mode_note": "Remak: Itilizatè sa a se yon kliyan.",
+        "territory_note": "Remak: Itilizatè a ap mande espesyalman sou {territory}.",
+        "retry_hint": " Tanpri re-eseye apre {retry_delay}.",
+        "greeting_customer": (
+            "Bonjou! Mwen se W.E.S., asistan NAWASA ou pou {territory}. "
+            "Kijan mwen ka ede w ak sèvis dlo ou jodi a?"
+        ),
+        "greeting_field_worker": (
+            "Bonjou! Mwen se W.E.S. — mòd Travayè sou teren pou {territory}. "
+            "Telechaje yon foto yon kontè dlo oswa yon endikatè rezèvwa anba a e m ap li valè a pou ou, "
+            "oswa mande m nenpòt lòt bagay sou operasyon NAWASA."
+        ),
+        "quota_error": (
+            "Mwen resevwa plis demann pase sa mwen ka jere kounye a (nou frape limit itilizasyon gratis jodi a). "
+            "Tanpri eseye ankò pita, oswa kontakte NAWASA dirèkteman nan 440-2155 pou asistans imedyat. "
+            "Kòd referans ou : {ref_code}"
+        ),
+        "gemini_error": "Rekèt Gemini a echwe : {error}{retry_hint}",
+    },
+}
+
+
+def t(key: str, **kwargs) -> str:
+    text = TRANSLATIONS[language].get(key, TRANSLATIONS["English"].get(key, key))
+    return text.format(**kwargs)
+
 # ---------------------------------------------------------------------------
 # Page setup
 # ---------------------------------------------------------------------------
@@ -122,33 +296,37 @@ Operational rules:
 # ---------------------------------------------------------------------------
 # Sidebar controls
 # ---------------------------------------------------------------------------
-st.sidebar.title("💧 W.E.S. Settings")
+# The language selector must initialize before translations are available.
+language = st.sidebar.radio(
+    TRANSLATIONS["English"]["sidebar_language"],
+    LANGUAGES,
+    index=0,
+)
+
+st.sidebar.title(t("sidebar_title"))
 
 # Do NOT use Streamlit Secrets or environment variables for the Gemini key.
 # Every user must provide their own API key in the sidebar.
 api_key_input = st.sidebar.text_input(
-    "Gemini API Key",
+    t("sidebar_api_key_label"),
     value="",
     type="password",
-    help=(
-        "Enter your personal Gemini API key here. "
-        "This app no longer uses a shared key or Streamlit Secrets, "
-        "so every visitor must provide their own key."
-    ),
+    help=t("sidebar_api_key_help"),
 )
 
-user_mode = st.sidebar.radio(
-    "I am a...",
-    ["Customer", "Field Worker"],
-    help="Field Worker mode adds a photo upload for logging meter/tank readings.",
+user_mode_label = st.sidebar.radio(
+    t("sidebar_i_am_a"),
+    [t("customer"), t("field_worker")],
 )
+user_mode = "Field Worker" if user_mode_label == t("field_worker") else "Customer"
+mode_label = t("field_worker") if user_mode == "Field Worker" else t("customer")
 
 territory = st.sidebar.selectbox(
-    "Select Territory",
-    ["Grenada", "Carriacou", "Petite Martinique"]
+    t("sidebar_select_territory"),
+    ["Grenada", "Carriacou", "Petite Martinique"],
 )
 
-if st.sidebar.button("Clear Chat"):
+if st.sidebar.button(t("sidebar_clear_chat")):
     st.session_state.messages = []
     st.rerun()
 
@@ -158,32 +336,25 @@ if st.sidebar.button("Clear Chat"):
 st.markdown(
     f"""
     <div class="wes-header">
-        <h1>💧 W.E.S. — NAWASA Assist</h1>
-        <p>Serving {territory} · National Water &amp; Sewerage Authority · Mode: {user_mode}</p>
+        <h1>💧 {t('page_title')}</h1>
+        <p>{t('page_subtitle', territory=territory, mode=mode_label)}</p>
     </div>
     """,
     unsafe_allow_html=True,
 )
 
 if not api_key_input:
-    st.info(
-        "Please enter your Gemini API key in the sidebar to start chatting.", icon="🔑")
+    st.info(t("api_key_required"), icon="🔑")
     st.stop()
 
 # Initialize chat history (reset greeting if territory or mode changes on a fresh session)
 session_key = (territory, user_mode)
 if "messages" not in st.session_state or st.session_state.get("session_key") != session_key:
-    if user_mode == "Field Worker":
-        greeting = (
-            f"Hello! I'm W.E.S. — Field Worker mode for {territory}. "
-            f"Upload a photo of a water meter or tank gauge below and I'll read the value for you, "
-            f"or ask me anything else about NAWASA operations."
-        )
-    else:
-        greeting = (
-            f"Hello! I'm W.E.S., your NAWASA assistant for {territory}. "
-            f"How can I help you with your water services today?"
-        )
+    greeting = (
+        t("greeting_field_worker", territory=territory)
+        if user_mode == "Field Worker"
+        else t("greeting_customer", territory=territory)
+    )
     st.session_state.messages = [{"role": "assistant", "content": greeting}]
     st.session_state.session_key = session_key
 
@@ -200,18 +371,18 @@ for msg in st.session_state.messages:
 uploaded_image = None
 if user_mode == "Field Worker":
     uploaded_image = st.file_uploader(
-        "Upload a photo of a water meter or tank gauge",
+        t("field_worker_upload"),
         type=["png", "jpg", "jpeg"],
     )
 
 # ---------------------------------------------------------------------------
 # Chat Input & Gemini Generation
 # ---------------------------------------------------------------------------
-prompt = st.chat_input("Type your message here...")
+prompt = st.chat_input(t("chat_input_placeholder"))
 
 # Auto-trigger a reading request when an image is uploaded without extra text
 if uploaded_image is not None and prompt is None:
-    prompt = "Please read the meter/tank value from the photo I uploaded."
+    prompt = t("auto_read_prompt")
 
 if prompt:
     image_bytes = uploaded_image.getvalue() if uploaded_image is not None else None
@@ -225,71 +396,67 @@ if prompt:
             st.image(image_bytes, width=250)
 
     with st.chat_message("assistant"):
-        with st.spinner("W.E.S. is thinking..."):
-            try:
-                client = genai.Client(api_key=api_key_input)
+            with st.spinner(t("thinking_spinner")):
+                try:
+                    client = genai.Client(api_key=api_key_input)
 
-                # Build full chat history for Gemini so it has conversational memory
-                contents = []
-                for m in st.session_state.messages:
-                    role = "user" if m["role"] == "user" else "model"
-                    parts = [types.Part.from_text(text=m["content"])]
-                    if m.get("image") and role == "user":
-                        parts.append(
-                            types.Part.from_bytes(
-                                data=m["image"], mime_type=image_mime or "image/jpeg")
-                        )
-                    contents.append(types.Content(role=role, parts=parts))
+                    # Build full chat history for Gemini so it has conversational memory
+                    contents = []
+                    for m in st.session_state.messages:
+                        role = "user" if m["role"] == "user" else "model"
+                        parts = [types.Part.from_text(text=m["content"])]
+                        if m.get("image") and role == "user":
+                            parts.append(
+                                types.Part.from_bytes(
+                                    data=m["image"], mime_type=image_mime or "image/jpeg")
+                            )
+                        contents.append(types.Content(role=role, parts=parts))
 
-                mode_note = (
-                    "\nNote: This user is a NAWASA field worker in Field Worker mode."
-                    if user_mode == "Field Worker"
-                    else "\nNote: This user is a customer."
-                )
-
-                config = types.GenerateContentConfig(
-                    system_instruction=SYSTEM_INSTRUCTION
-                    + f"\nNote: The user is asking specifically regarding {territory}."
-                    + mode_note,
-                    temperature=0.7,
-                )
-
-                response = client.models.generate_content(
-                    model="gemini-flash-latest",
-                    contents=contents,
-                    config=config,
-                )
-
-                bot_reply = response.text
-                st.markdown(bot_reply)
-                st.session_state.messages.append(
-                    {"role": "assistant", "content": bot_reply})
-
-            except Exception as e:
-                error_message = str(e)
-                if hasattr(e, "error") and isinstance(e.error, dict):
-                    err = e.error
-                    error_message = err.get("message", error_message)
-
-                is_quota_error = (
-                    "RESOURCE_EXHAUSTED" in error_message
-                    or "quota" in error_message.lower()
-                    or "limit" in error_message.lower()
-                )
-
-                if is_quota_error:
-                    ref_code = st.session_state.get("ref_code", "WES-XXXXXX")
-                    st.error(
-                        "I'm getting more requests than I can handle right now (we've hit today's free usage limit). "
-                        "Please try again in a little while, or contact NAWASA directly at 440-2155 for immediate help. "
-                        f"Your reference code: {ref_code}"
+                    mode_note = (
+                        f"\n{t('field_worker_mode_note')}"
+                        if user_mode == "Field Worker"
+                        else f"\n{t('customer_mode_note')}"
                     )
-                else:
-                    retry_hint = ""
+
+                    config = types.GenerateContentConfig(
+                        system_instruction=SYSTEM_INSTRUCTION
+                        + f"\n{t('territory_note', territory=territory)}"
+                        + mode_note,
+                        temperature=0.7,
+                    )
+
+                    response = client.models.generate_content(
+                        model="gemini-flash-latest",
+                        contents=contents,
+                        config=config,
+                    )
+
+                    bot_reply = response.text
+                    st.markdown(bot_reply)
+                    st.session_state.messages.append(
+                        {"role": "assistant", "content": bot_reply})
+
+                except Exception as e:
+                    error_message = str(e)
                     if hasattr(e, "error") and isinstance(e.error, dict):
-                        for detail in e.error.get("details", []):
-                            if isinstance(detail, dict) and detail.get("@type", "").endswith("RetryInfo"):
-                                retry_delay = detail.get("retryDelay")
-                                if retry_delay:
-                                    retry_hint = f" Please retry after {retry_delay}."
-                    st.error(f"Gemini request failed: {error_message}{retry_hint}")
+                        err = e.error
+                        error_message = err.get("message", error_message)
+
+                    is_quota_error = (
+                        "RESOURCE_EXHAUSTED" in error_message
+                        or "quota" in error_message.lower()
+                        or "limit" in error_message.lower()
+                    )
+
+                    if is_quota_error:
+                        ref_code = st.session_state.get("ref_code", "WES-XXXXXX")
+                        st.error(t("quota_error", ref_code=ref_code))
+                    else:
+                        retry_hint = ""
+                        if hasattr(e, "error") and isinstance(e.error, dict):
+                            for detail in e.error.get("details", []):
+                                if isinstance(detail, dict) and detail.get("@type", "").endswith("RetryInfo"):
+                                    retry_delay = detail.get("retryDelay")
+                                    if retry_delay:
+                                        retry_hint = t("retry_hint", retry_delay=retry_delay)
+                        st.error(t("gemini_error", error=error_message, retry_hint=retry_hint))
