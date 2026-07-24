@@ -68,6 +68,11 @@ TRANSLATIONS = {
         "faq_high_consumption": "High consumption can come from estimated bills, a leak, an unsecured or easily accessible tap, or a faulty meter. To check for a leak: turn off all taps, then watch the meter dial — if it's still turning, there's a leak somewhere on the property.",
         "faq_estimated_bills": "Estimated bills are calculated using an average of your last three months' consumption.",
         "faq_disconnection": "Service may be disconnected at the customer's request, for non-payment of arrears, for wastage or abuse, or for illegal tampering with meters or fittings. The minimum threshold for disconnection due to arrears is $50, once that amount is at least 30 days overdue.",
+        "faq_contact": "Need help? Call 440-2155 or WhatsApp 405 5245 / 459 6064 / 405 9143. Do not share sensitive personal or payment details in chat.",
+        "faq_fee_conflict": "Two published connection-fee tables exist: one from the NAWASA FAQ page and one from the 2010 gazetted regulation. Confirm with NAWASA staff before relying on either.",
+        "faq_deposit_reconnection": "Deposits: Domestic $240, Non-domestic $340. Reconnection fees: Domestic $75, Non-domestic $150.",
+        "faq_billing_terms": "Bills are due within 30 days of issue. Late amounts accrue 1% interest per month, and service may be discontinued after 30+ days overdue.",
+        "faq_leak_check": "To self-check for a leak: turn off all taps and appliances, watch the meter. If it keeps moving, report a leak; if it stops, the issue is likely an estimated bill, an outdoor tap, or a meter problem.",
         "quota_error": (
             "I'm getting more requests than I can handle right now (we've hit today's free usage limit). "
             "Please try again in a little while, or contact NAWASA directly at 440-2155 for immediate help. "
@@ -253,8 +258,31 @@ def t(key: str, **kwargs) -> str:
 # ---------------------------------------------------------------------------
 # Page setup
 # ---------------------------------------------------------------------------
+app_dir = Path(__file__).resolve().parent
+logo_path = app_dir / "logo.png"
+logo_base64 = ""
+if logo_path.exists():
+    logo_base64 = base64.b64encode(logo_path.read_bytes()).decode()
+
 st.set_page_config(page_title="W.E.S. - NAWASA Assist",
                    page_icon="💧", layout="centered")
+
+assistant_avatar_style = (
+    f"""
+    div[data-testid="chatAvatarIcon-assistant"] > div {{
+        background: transparent !important;
+        background-image: url("data:image/png;base64,{logo_base64}") !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        border-radius: 50% !important;
+    }}
+    div[data-testid="chatAvatarIcon-assistant"] svg {{
+        display: none !important;
+    }}
+    """
+    if logo_base64 else ""
+)
 
 # --- Deep Ocean color palette -------------------------------------------------
 NAVY = "#08304A"
@@ -319,8 +347,7 @@ st.markdown(
     .stButton button:hover {{
         background-color: {NAVY};
         color: {WHITE};
-    }}
-    </style>
+    }}    {assistant_avatar_style}    </style>
     """,
     unsafe_allow_html=True,
 )
@@ -337,7 +364,8 @@ Fact Sheet (ground truth — never state facts beyond this list):
 - Main Headquarters: The Carenage, St. George's.
 - Key Sub-Offices: Grenville (St. Andrew), Gouyave (St. John), Dusty Highway (Grand Anse), and Hillsborough (Carriacou).
 - Contact Hotline: Call 440-2155 or emergency 911 / 440-2155 for main line.
-- Emergency Water Leaks: Direct customers to report leaks immediately via hotline or website portal.
+- WhatsApp: 405 5245, 459 6064, 405 9143.
+- Emergency Water Leaks: Direct customers to report leaks immediately via the hotline, WhatsApp, or the website portal.
 - Payment Options: NAWASA offices, local banks (Republic Bank, Grenada Co-operative Bank), online banking, or SurePay.
 - New service connections require a completed application under NAWASA's Requirements for Private Water Service and the Terms and Conditions for Water Service.
 - New connection costs depend on the pipe size:
@@ -347,16 +375,36 @@ Fact Sheet (ground truth — never state facts beyond this list):
   - $420 for a 1¼"–2" main
   - $1,000 for a 4" main
   Additional variable costs may include transportation, pipes/fittings, and VAT.
-- High water consumption may be caused by an estimated bill, a leak, an unsecured or accessible tap, or a faulty meter. To check for a leak, turn off all taps and watch the meter dial; if it continues to turn, there is likely a leak.
+- There is also an alternative published set of connection fees from the official 2010 gazetted regulation:
+  - $80 for a ½" main
+  - $120 for a ¾" main
+  - $175 for a 1" main
+  - $420 for a 1½"–2" main
+  - $1,000 for a 2½"–3" main
+  - $1,200 for a 4" main
+  - $1,500 for over 4"
+- A 2024 news report suggests a revised service charge range of EC$340–$8,000 for new/reconnecting customers; this is unverified and must be checked with NAWASA staff.
+- Service Charge (deposit, per 2010 regulation): Domestic buildings $240; Non-domestic $340.
+- Reconnection Fee (per 2010 regulation): Domestic $75; Non-domestic $150.
+- Billing Terms: Bills are due within 30 days of issue. Amounts unpaid past 30 days accrue 1% interest per month, and NAWASA may discontinue service without further notice once 30+ days overdue.
+- Disconnection Threshold (per FAQ): minimum $50 in arrears, at least 30 days overdue.
 - Estimated bills are calculated from the average of the customer's last three months' consumption.
-- NAWASA may disconnect service at the customer's request, for non-payment of arrears, for wastage/abuse, or for illegal tampering with meters or fittings. The minimum disconnection threshold is $50 in arrears and at least 30 days overdue.
+- Sewerage Rate Formula: Domestic = one third of the monthly water rate; Non-domestic = two thirds of the monthly water rate.
+
+Leak self-diagnosis:
+1. Ask the customer to turn off every tap and water-using appliance on the property.
+2. Ask them to watch the water meter dial.
+3. If the dial keeps moving with everything off, that indicates a leak — advise reporting it via hotline, WhatsApp, or the website portal.
+4. If the dial stops, the issue is more likely an estimated bill, an unsecured/outdoor tap, or a meter problem — recommend contacting the hotline for investigation.
 
 Operational rules:
-- You do NOT have access to any individual customer's live account balance, bill amount, or outage status — you are not connected to NAWASA's billing or operations systems. Be honest about this and direct customers to the hotline (440-2155) for account-specific or real-time outage information.
+- You do NOT have access to any individual customer's live account balance, bill amount, or outage status — you are not connected to NAWASA's billing or operations systems. Be honest about this and direct customers to the hotline (440-2155) for account-specific or real-time information.
 - You do NOT process payments, dispatch repair crews, or make operational decisions. You inform; NAWASA staff act.
+- When published facts conflict (like the two connection-fee tables above), state both clearly with their source rather than picking one.
 - If a user uploads a photo of a water meter or tank gauge, read the numeric value as precisely as you can and state it clearly, along with a brief note that the reading should be confirmed against the physical meter before logging.
 - Always maintain a warm, helpful, and respectful Caribbean tone.
 - Stay strictly within NAWASA water/sewerage topics; politely redirect anything unrelated.
+- When a request needs a human (an account-specific question, a complaint, an emergency, or anything outside what you can confidently answer), soften the handoff, tell the user to contact the hotline ((473) 440-2155) or WhatsApp (405 5245 / 459 6064 / 405 9143), and give them their session reference code: {ref_code}
 """
 
 # ---------------------------------------------------------------------------
@@ -396,17 +444,29 @@ if st.sidebar.button(t("sidebar_clear_chat")):
     st.session_state.messages = []
     st.rerun()
 
+st.sidebar.caption("☎ Hotline: 440-2155")
+st.sidebar.caption("📱 WhatsApp: 405 5245 / 459 6064 / 405 9143")
+st.sidebar.caption("ℹ️ Messages and photos are processed by Google's Gemini API (cloud-based, outside Grenada). Do not share sensitive personal or payment details in chat.")
+
 # ---------------------------------------------------------------------------
 # App Title & Layout
 # ---------------------------------------------------------------------------
 app_dir = Path(__file__).resolve().parent
 logo_path = app_dir / "logo.png"
+# Ensure the logo is loaded from the app directory and displayed at the top center.
 logo_exists = logo_path.exists()
 
 if logo_exists:
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st.image(str(logo_path), width=110)
+    logo_bytes = logo_path.read_bytes()
+    encoded_logo = base64.b64encode(logo_bytes).decode()
+    st.markdown(
+        f"""
+        <div style="width:100%; display:flex; justify-content:center; align-items:center; margin-bottom:1rem;">
+            <img src="data:image/png;base64,{encoded_logo}" width="110" style="display:block; margin:0 auto;" />
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 st.markdown(
     f"""
@@ -417,6 +477,24 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+with st.expander(t("faq_title"), expanded=True):
+    st.markdown(
+        f"""
+        <p>{t('faq_intro')}</p>
+        <ul>
+            <li>{t('faq_contact')}</li>
+            <li>{t('faq_apply_new_connection')}</li>
+            <li>{t('faq_connection_cost')}</li>
+            <li>{t('faq_fee_conflict')}</li>
+            <li>{t('faq_deposit_reconnection')}</li>
+            <li>{t('faq_billing_terms')}</li>
+            <li>{t('faq_high_consumption')}</li>
+            <li>{t('faq_leak_check')}</li>
+        </ul>
+        """,
+        unsafe_allow_html=True,
+    )
 
 if not api_key_input:
     st.info(t("api_key_required"), icon="🔑")
