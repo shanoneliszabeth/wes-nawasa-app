@@ -290,18 +290,29 @@ if prompt:
 
             except Exception as e:
                 error_message = str(e)
-                retry_hint = ""
                 if hasattr(e, "error") and isinstance(e.error, dict):
                     err = e.error
                     error_message = err.get("message", error_message)
-                    for detail in err.get("details", []):
-                        if isinstance(detail, dict) and detail.get("@type", "").endswith("RetryInfo"):
-                            retry_delay = detail.get("retryDelay")
-                            if retry_delay:
-                                retry_hint = f" Please retry after {retry_delay}."
-                elif "RESOURCE_EXHAUSTED" in error_message or "quota" in error_message.lower():
-                    error_message = (
-                        "Gemini quota exceeded. Please check your Google Cloud AI quota and billing details, "
-                        "or wait before retrying."
+
+                is_quota_error = (
+                    "RESOURCE_EXHAUSTED" in error_message
+                    or "quota" in error_message.lower()
+                    or "limit" in error_message.lower()
+                )
+
+                if is_quota_error:
+                    ref_code = st.session_state.get("ref_code", "WES-XXXXXX")
+                    st.error(
+                        "I'm getting more requests than I can handle right now (we've hit today's free usage limit). "
+                        "Please try again in a little while, or contact NAWASA directly at 440-2155 for immediate help. "
+                        f"Your reference code: {ref_code}"
                     )
-                st.error(f"Gemini request failed: {error_message}{retry_hint}")
+                else:
+                    retry_hint = ""
+                    if hasattr(e, "error") and isinstance(e.error, dict):
+                        for detail in e.error.get("details", []):
+                            if isinstance(detail, dict) and detail.get("@type", "").endswith("RetryInfo"):
+                                retry_delay = detail.get("retryDelay")
+                                if retry_delay:
+                                    retry_hint = f" Please retry after {retry_delay}."
+                    st.error(f"Gemini request failed: {error_message}{retry_hint}")
