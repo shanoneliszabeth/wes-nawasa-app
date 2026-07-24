@@ -59,6 +59,13 @@ TRANSLATIONS = {
             "Upload a photo of a water meter or tank gauge below and I'll read the value for you, "
             "or ask me anything else about NAWASA operations."
         ),
+        "faq_title": "Frequently Asked Questions",
+        "faq_intro": "Common NAWASA questions and answers about new service connections, billing, leaks, and disconnection.",
+        "faq_apply_new_connection": "Fill out an application for new service connection, per the Requirements for Private Water Service and the Terms and Conditions for Water Service.",
+        "faq_connection_cost": "Based on pipe size — $75 (½\" main), $125 (¾\" main), $175 (1\" main), $420 (1¼\"–2\" main), or $1,000 (4\" main) — plus variable costs like transportation, pipes/fittings, and VAT.",
+        "faq_high_consumption": "Could be estimated bills, a leak, an unsecured/accessible tap, or a faulty meter. To check for a leak: turn off all taps, then watch the meter dial — if it's still turning, there is likely a leak.",
+        "faq_estimated_bills": "Estimated bills are calculated from an average of the customer's last three months' consumption.",
+        "faq_disconnection": "NAWASA may disconnect service at the customer's request, for non-payment of arrears, for wastage/abuse, or for illegal tampering with meters or fittings. Minimum disconnection threshold: $50 in arrears and at least 30 days overdue.",
         "quota_error": (
             "I'm getting more requests than I can handle right now (we've hit today's free usage limit). "
             "Please try again in a little while, or contact NAWASA directly at 440-2155 for immediate help. "
@@ -311,6 +318,48 @@ st.markdown(
         background-color: {NAVY};
         color: {WHITE};
     }}
+    .wes-faq {{
+        margin-bottom: 1.5rem;
+    }}
+    .wes-faq h2 {{
+        margin: 0 0 0.5rem 0;
+        color: {NAVY};
+        font-size: 1.25rem;
+    }}
+    .wes-faq p {{
+        color: {NAVY};
+        margin: 0 0 1rem 0;
+        font-size: 0.95rem;
+    }}
+    .wes-faq-container {{
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 1rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        margin-top: 0.5rem;
+    }}
+    .wes-faq-card {{
+        min-width: 280px;
+        max-width: 380px;
+        background-color: {WHITE};
+        color: {NAVY};
+        border-radius: 14px;
+        padding: 1rem;
+        box-shadow: 0 8px 24px rgba(8, 48, 74, 0.08);
+        border: 1px solid rgba(8, 48, 74, 0.08);
+        flex: 0 0 auto;
+    }}
+    .wes-faq-card strong {{
+        display: block;
+        margin-bottom: 0.6rem;
+        font-size: 1rem;
+    }}
+    .wes-faq-card p {{
+        margin: 0;
+        line-height: 1.5;
+        font-size: 0.95rem;
+    }}
     </style>
     """,
     unsafe_allow_html=True,
@@ -330,6 +379,17 @@ Fact Sheet (ground truth — never state facts beyond this list):
 - Contact Hotline: Call 440-2155 or emergency 911 / 440-2155 for main line.
 - Emergency Water Leaks: Direct customers to report leaks immediately via hotline or website portal.
 - Payment Options: NAWASA offices, local banks (Republic Bank, Grenada Co-operative Bank), online banking, or SurePay.
+- New service connections require a completed application under NAWASA's Requirements for Private Water Service and the Terms and Conditions for Water Service.
+- New connection costs depend on the pipe size:
+  - $75 for a ½" main
+  - $125 for a ¾" main
+  - $175 for a 1" main
+  - $420 for a 1¼"–2" main
+  - $1,000 for a 4" main
+  Additional variable costs may include transportation, pipes/fittings, and VAT.
+- High water consumption may be caused by an estimated bill, a leak, an unsecured or accessible tap, or a faulty meter. To check for a leak, turn off all taps and watch the meter dial; if it continues to turn, there is likely a leak.
+- Estimated bills are calculated from the average of the customer's last three months' consumption.
+- NAWASA may disconnect service at the customer's request, for non-payment of arrears, for wastage/abuse, or for illegal tampering with meters or fittings. The minimum disconnection threshold is $50 in arrears and at least 30 days overdue.
 
 Operational rules:
 - You do NOT have access to any individual customer's live account balance, bill amount, or outage status — you are not connected to NAWASA's billing or operations systems. Be honest about this and direct customers to the hotline (440-2155) for account-specific or real-time outage information.
@@ -384,6 +444,32 @@ st.markdown(
     <div class="wes-header">
         <h1>💧 {t('page_title')}</h1>
         <p>{t('page_subtitle', territory=territory, mode=mode_label)}</p>
+    </div>
+    <div class="wes-faq">
+        <h2>{t('faq_title')}</h2>
+        <p>{t('faq_intro')}</p>
+        <div class="wes-faq-container">
+            <div class="wes-faq-card">
+                <strong>How do I apply for a new connection?</strong>
+                <p>{t('faq_apply_new_connection')}</p>
+            </div>
+            <div class="wes-faq-card">
+                <strong>What is the cost of a new connection?</strong>
+                <p>{t('faq_connection_cost')}</p>
+            </div>
+            <div class="wes-faq-card">
+                <strong>My water consumption is too high — what could be the problem?</strong>
+                <p>{t('faq_high_consumption')}</p>
+            </div>
+            <div class="wes-faq-card">
+                <strong>How are estimated bills calculated?</strong>
+                <p>{t('faq_estimated_bills')}</p>
+            </div>
+            <div class="wes-faq-card">
+                <strong>Under what circumstances does NAWASA disconnect water service?</strong>
+                <p>{t('faq_disconnection')}</p>
+            </div>
+        </div>
     </div>
     """,
     unsafe_allow_html=True,
