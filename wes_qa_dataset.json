@@ -1,262 +1,709 @@
 [
   {
     "question": "What areas does NAWASA serve?",
-    "answer": "NAWASA provides water and sewerage services across Grenada, Carriacou, and Petite Martinique."
+    "answer": "NAWASA provides water and sewerage services across Grenada, Carriacou, and Petite Martinique.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Where is NAWASA's main office located?",
-    "answer": "NAWASA's headquarters is located at The Carenage, St. George's."
+    "answer": "NAWASA's headquarters is located at The Carenage, St. George's.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Is there a NAWASA office in Grenville?",
-    "answer": "Yes, NAWASA has a sub-office in Grenville, St. Andrew."
+    "answer": "Yes, NAWASA has a sub-office in Grenville, St. Andrew.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Where is the NAWASA office in Gouyave?",
-    "answer": "There is a NAWASA sub-office located in Gouyave, St. John."
+    "answer": "There is a NAWASA sub-office located in Gouyave, St. John.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Do you have an office near Grand Anse?",
-    "answer": "Yes, NAWASA has a sub-office at Dusty Highway, Grand Anse."
+    "answer": "Yes, NAWASA has a sub-office at Dusty Highway, Grand Anse.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Where is the Carriacou office?",
-    "answer": "The Carriacou office is located in Hillsborough."
+    "answer": "The Carriacou office is located in Hillsborough.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "What is the NAWASA hotline number?",
-    "answer": "You can reach NAWASA at 440-2155 for the main hotline."
+    "answer": "You can reach NAWASA at 440-2155 for the main hotline.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "What number do I call in a water emergency?",
-    "answer": "For emergencies, please call 911 or 440-2155."
+    "answer": "For emergencies, please call 911 or 440-2155.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "How do I report a water leak?",
-    "answer": "You can report a leak immediately by calling the hotline at 440-2155 or through the NAWASA website portal."
+    "answer": "You can report a leak immediately by calling the hotline at 440-2155 or through the NAWASA website portal.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "There's a burst pipe near my house, who do I call?",
-    "answer": "Please report it right away by calling 440-2155 or through the online reporting portal so a crew can be dispatched."
+    "answer": "Please report it right away by calling 440-2155 or through the online reporting portal so a crew can be dispatched.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "How can I pay my water bill?",
-    "answer": "You can pay in cash at the Main Office (The Carenage), Grenville, or Gouyave sub-offices; drop a cheque at the Main Office, Grenville, or Dusty Highway cheque boxes; pay via online banking through Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean; or use a payment center such as Grenada Co-operative Bank, Western Union, RBTT Bank, or River Sallee Co-operative Credit Union."
+    "answer": "You can pay in cash at the Main Office (The Carenage), Grenville, or Gouyave sub-offices; drop a cheque at the Main Office, Grenville, or Dusty Highway cheque boxes; pay via online banking through Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean; or use a payment center such as Grenada Co-operative Bank, Western Union, RBTT Bank, or River Sallee Co-operative Credit Union.",
+    "source": "https://www.nawasa.gd/customer-care/bill-payment-options — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Can I pay my NAWASA bill at a bank?",
-    "answer": "Yes — online banking payments are accepted through Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean."
+    "answer": "Yes — online banking payments are accepted through Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean.",
+    "source": "https://www.nawasa.gd/customer-care/bill-payment-options — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Is there an online payment option?",
-    "answer": "Yes, you can pay your NAWASA bill through online banking with Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean."
-  },
-  {
-    "question": "Can I pay my bill at a payment center?",
-    "answer": "Yes, payment centers include Grenada Co-operative Bank, Western Union, RBTT Bank, and River Sallee Co-operative Credit Union."
+    "answer": "Yes, you can pay your NAWASA bill through online banking with Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean.",
+    "source": "https://www.nawasa.gd/customer-care/bill-payment-options — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Do I have to visit a NAWASA office to pay my bill?",
-    "answer": "No, you can also pay through online banking, a payment center (Western Union, RBTT Bank, River Sallee Co-operative Credit Union, or Grenada Co-operative Bank), or drop a cheque in one of the cheque boxes at the Main Office, Grenville, or Dusty Highway."
+    "answer": "No, you can also pay through online banking, a payment center (Western Union, RBTT Bank, River Sallee Co-operative Credit Union, or Grenada Co-operative Bank), or drop a cheque in one of the cheque boxes at the Main Office, Grenville, or Dusty Highway.",
+    "source": "https://www.nawasa.gd/customer-care/bill-payment-options — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "What territories can I select in this chatbot?",
-    "answer": "You can select Grenada, Carriacou, or Petite Martinique from the sidebar to get territory-specific answers."
+    "answer": "You can select Grenada, Carriacou, or Petite Martinique from the sidebar to get territory-specific answers.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "All personas"
   },
   {
     "question": "Where is the closest NAWASA office to St. George's?",
-    "answer": "The main headquarters is located right in St. George's, at The Carenage."
+    "answer": "The main headquarters is located right in St. George's, at The Carenage.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Who do I contact for water issues in Grand Anse?",
-    "answer": "You can contact the Dusty Highway sub-office in Grand Anse or call the hotline at 440-2155."
+    "answer": "You can contact the Dusty Highway sub-office in Grand Anse or call the hotline at 440-2155.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Can I call NAWASA after hours for an emergency leak?",
-    "answer": "Yes, emergencies can be reported at any time via 911 or 440-2155."
+    "answer": "Yes, emergencies can be reported at any time via 911 or 440-2155.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "What is NAWASA?",
-    "answer": "NAWASA is the National Water and Sewerage Authority, responsible for water and sewerage services in Grenada, Carriacou, and Petite Martinique."
+    "answer": "NAWASA is the National Water and Sewerage Authority, responsible for water and sewerage services in Grenada, Carriacou, and Petite Martinique.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Does NAWASA handle sewerage services too?",
-    "answer": "Yes, NAWASA manages both water supply and sewerage services across its service area."
+    "answer": "Yes, NAWASA manages both water supply and sewerage services across its service area.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "How do I contact NAWASA about my bill?",
-    "answer": "You can call the hotline at 440-2155 or visit your nearest NAWASA office for billing questions."
+    "answer": "You can call the hotline at 440-2155 or visit your nearest NAWASA office for billing questions.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Where can I find a list of NAWASA office locations?",
-    "answer": "NAWASA's offices include the headquarters at The Carenage, St. George's, and sub-offices in Grenville, Gouyave, Dusty Highway, and Hillsborough."
+    "answer": "NAWASA's offices include the headquarters at The Carenage, St. George's, and sub-offices in Grenville, Gouyave, Dusty Highway, and Hillsborough.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "What should I do if my water pressure is low?",
-    "answer": "Please contact the NAWASA hotline at 440-2155 to report low water pressure so it can be investigated."
+    "answer": "Please contact the NAWASA hotline at 440-2155 to report low water pressure so it can be investigated.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "How do I report a sewerage issue?",
-    "answer": "Sewerage issues can be reported the same way as leaks — call 440-2155 or use the website portal."
+    "answer": "Sewerage issues can be reported the same way as leaks — call 440-2155 or use the website portal.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Is NAWASA available in Petite Martinique?",
-    "answer": "Yes, NAWASA serves Petite Martinique as part of its overall service area."
+    "answer": "Yes, NAWASA serves Petite Martinique as part of its overall service area.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "What's the fastest way to report an emergency?",
-    "answer": "Calling the hotline at 440-2155 (or 911 for emergencies) is the fastest way to report an issue."
+    "answer": "Calling the hotline at 440-2155 (or 911 for emergencies) is the fastest way to report an issue.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Can I report a leak online instead of calling?",
-    "answer": "Yes, leaks can also be reported through the NAWASA website portal."
+    "answer": "Yes, leaks can also be reported through the NAWASA website portal.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Where is NAWASA's headquarters?",
-    "answer": "NAWASA's headquarters is at The Carenage, St. George's."
+    "answer": "NAWASA's headquarters is at The Carenage, St. George's.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Which bank can I use to pay my water bill?",
-    "answer": "You can pay through online banking with Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean."
+    "answer": "You can pay through online banking with Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean.",
+    "source": "https://www.nawasa.gd/customer-care/bill-payment-options — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Do you accept online banking payments?",
-    "answer": "Yes, online banking is accepted through Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean."
+    "answer": "Yes, online banking is accepted through Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean.",
+    "source": "https://www.nawasa.gd/customer-care/bill-payment-options — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "What areas in Grenada have NAWASA sub-offices?",
-    "answer": "NAWASA sub-offices in Grenada are located in Grenville (St. Andrew), Gouyave (St. John), and Dusty Highway (Grand Anse)."
+    "answer": "NAWASA sub-offices in Grenada are located in Grenville (St. Andrew), Gouyave (St. John), and Dusty Highway (Grand Anse).",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "How do I get in touch with NAWASA in Carriacou?",
-    "answer": "You can visit the Hillsborough office in Carriacou or call the main hotline at 440-2155."
+    "answer": "You can visit the Hillsborough office in Carriacou or call the main hotline at 440-2155.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "What happens after I report a leak?",
-    "answer": "Once a leak is reported via the hotline or portal, a NAWASA team is notified to assess and address the issue."
+    "answer": "Once a leak is reported via the hotline or portal, a NAWASA team is notified to assess and address the issue.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Can I request a copy of my bill from NAWASA?",
-    "answer": "For bill copies, please contact the hotline at 440-2155 or visit a NAWASA office."
+    "answer": "For bill copies, please contact the hotline at 440-2155 or visit a NAWASA office.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Is there a way to check my account balance through this chatbot?",
-    "answer": "This chatbot doesn't have access to individual account information — please call 440-2155 or visit a NAWASA office for account details."
+    "answer": "This chatbot doesn't have access to individual account information — please call 440-2155 or visit a NAWASA office for account details.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "What are NAWASA's payment options in one list?",
-    "answer": "You can pay in cash at the Main Office, Grenville, or Gouyave sub-offices; by cheque box at the Main Office, Grenville, or Dusty Highway; via online banking (Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean); or at a payment center (Grenada Co-operative Bank, Western Union, RBTT Bank, or River Sallee Co-operative Credit Union)."
+    "answer": "You can pay in cash at the Main Office, Grenville, or Gouyave sub-offices; by cheque box at the Main Office, Grenville, or Dusty Highway; via online banking (Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean); or at a payment center (Grenada Co-operative Bank, Western Union, RBTT Bank, or River Sallee Co-operative Credit Union).",
+    "source": "https://www.nawasa.gd/customer-care/bill-payment-options — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Who provides water services in Grenada?",
-    "answer": "NAWASA (the National Water and Sewerage Authority) provides water services in Grenada."
+    "answer": "NAWASA (the National Water and Sewerage Authority) provides water services in Grenada.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "How do I reach NAWASA customer service?",
-    "answer": "You can call the hotline at 440-2155 to reach NAWASA customer service."
+    "answer": "You can call the hotline at 440-2155 to reach NAWASA customer service.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "What number do I call for a general inquiry?",
-    "answer": "For general inquiries, call the NAWASA hotline at 440-2155."
+    "answer": "For general inquiries, call the NAWASA hotline at 440-2155.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Is 911 only for water emergencies?",
-    "answer": "911 can be used for urgent emergencies, including serious water-related incidents; 440-2155 is also available for NAWASA emergencies."
+    "answer": "911 can be used for urgent emergencies, including serious water-related incidents; 440-2155 is also available for NAWASA emergencies.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Where is the sub-office for St. John?",
-    "answer": "The sub-office serving St. John is located in Gouyave."
+    "answer": "The sub-office serving St. John is located in Gouyave.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Where is the sub-office for St. Andrew?",
-    "answer": "The sub-office serving St. Andrew is located in Grenville."
+    "answer": "The sub-office serving St. Andrew is located in Grenville.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Can I visit any NAWASA office to pay my bill regardless of territory?",
-    "answer": "Generally, you can pay at any NAWASA office; for territory-specific guidance, it's best to confirm with the hotline at 440-2155."
+    "answer": "Generally, you can pay at any NAWASA office; for territory-specific guidance, it's best to confirm with the hotline at 440-2155.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "What's the difference between the hotline and emergency numbers?",
-    "answer": "440-2155 serves as both the main line and an emergency contact; 911 is also available for urgent emergencies."
+    "answer": "440-2155 serves as both the main line and an emergency contact; 911 is also available for urgent emergencies.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "Does NAWASA offer a mobile app for payments?",
-    "answer": "No separate mobile app is mentioned — payment options are cash at NAWASA offices, cheque boxes, online banking, and payment centers."
+    "answer": "No separate mobile app is mentioned — payment options are cash at NAWASA offices, cheque boxes, online banking, and payment centers.",
+    "source": "https://www.nawasa.gd/customer-care/bill-payment-options — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "I moved to a new home, how do I set up water service?",
-    "answer": "For new water service setup, please contact NAWASA directly via the hotline at 440-2155 or visit your nearest office."
+    "answer": "For new water service setup, please contact NAWASA directly via the hotline at 440-2155 or visit your nearest office.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "How long does it take to fix a reported leak?",
-    "answer": "Response times can vary; for the most accurate estimate, please contact the hotline at 440-2155 after reporting."
+    "answer": "Response times can vary; for the most accurate estimate, please contact the hotline at 440-2155 after reporting.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Can businesses use the same payment options as households?",
-    "answer": "Yes, the same payment options — cash, cheque boxes, online banking, and payment centers — are available to both households and businesses."
+    "answer": "Yes, the same payment options — cash, cheque boxes, online banking, and payment centers — are available to both households and businesses.",
+    "source": "https://www.nawasa.gd/customer-care/bill-payment-options — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "What should I do if I smell sewage near my home?",
-    "answer": "Please report it immediately through the hotline at 440-2155 or the website portal, as this may indicate a sewerage issue."
+    "answer": "Please report it immediately through the hotline at 440-2155 or the website portal, as this may indicate a sewerage issue.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Are NAWASA offices open on weekends?",
-    "answer": "This chatbot doesn't have specific office hours on file — please call 440-2155 to confirm office hours."
+    "answer": "This chatbot doesn't have specific office hours on file — please call 440-2155 to confirm office hours.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Can I get help in French or another language?",
-    "answer": "Yes — use the language selector in the sidebar to switch between English, Spanish, French, Kreyòl, and Chinese."
+    "answer": "Yes — use the language selector in the sidebar to switch between English, Spanish, French, Kreyòl, and Chinese.",
+    "source": "W.E.S. system design — describes this app's own multilingual feature, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "All personas"
   },
   {
     "question": "What is W.E.S.?",
-    "answer": "W.E.S. is NAWASA's virtual assistant, here to help answer questions about water and sewerage services in Grenada, Carriacou, and Petite Martinique."
+    "answer": "W.E.S. is NAWASA's virtual assistant, here to help answer questions about water and sewerage services in Grenada, Carriacou, and Petite Martinique.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "All personas"
   },
   {
     "question": "Can you help me with something unrelated to water service?",
-    "answer": "I'm here specifically to help with NAWASA water and sewerage questions — for other topics, I'd recommend a different resource."
+    "answer": "I'm here specifically to help with NAWASA water and sewerage questions — for other topics, I'd recommend a different resource.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "All personas"
   },
   {
     "question": "Who do I contact if I'm unhappy with my service?",
-    "answer": "You can raise concerns by calling the NAWASA hotline at 440-2155 or visiting your nearest office."
+    "answer": "You can raise concerns by calling the NAWASA hotline at 440-2155 or visiting your nearest office.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Does NAWASA provide services outside Grenada, Carriacou, and Petite Martinique?",
-    "answer": "No, NAWASA's service area is limited to Grenada, Carriacou, and Petite Martinique."
+    "answer": "No, NAWASA's service area is limited to Grenada, Carriacou, and Petite Martinique.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   },
   {
     "question": "I'm a field worker, how do I log a meter reading?",
-    "answer": "Switch to Field Worker mode in the sidebar, then upload a clear photo of the meter or tank gauge — I'll read the numbers for you."
+    "answer": "Switch to Field Worker mode in the sidebar, then upload a clear photo of the meter or tank gauge — I'll read the numbers for you.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Field Worker"
   },
   {
     "question": "Can you read a water meter from a photo?",
-    "answer": "Yes, in Field Worker mode you can upload a photo of a meter or tank gauge and I'll extract the numeric reading."
+    "answer": "Yes, in Field Worker mode you can upload a photo of a meter or tank gauge and I'll extract the numeric reading.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Field Worker"
   },
   {
     "question": "What if the meter reading in the photo is blurry?",
-    "answer": "If the reading isn't clear enough to confirm, I'll let you know rather than guess, and I'll ask for a clearer photo."
+    "answer": "If the reading isn't clear enough to confirm, I'll let you know rather than guess, and I'll ask for a clearer photo.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Field Worker"
   },
   {
     "question": "Should I still double check the reading you give me?",
-    "answer": "Yes — please confirm the reading against the physical meter before it's logged, since I assist with the reading but don't certify it."
+    "answer": "Yes — please confirm the reading against the physical meter before it's logged, since I assist with the reading but don't certify it.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Field Worker"
   },
   {
     "question": "Is there an outage in my area right now?",
-    "answer": "I don't have access to live outage data — please call the hotline at 440-2155 for the most current outage status in your area."
+    "answer": "I don't have access to live outage data — please call the hotline at 440-2155 for the most current outage status in your area.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "How will I know when the water is coming back after an outage?",
-    "answer": "For real-time updates on when service will be restored, please contact the hotline at 440-2155."
+    "answer": "For real-time updates on when service will be restored, please contact the hotline at 440-2155.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Can you check my account balance for me?",
-    "answer": "I'm not connected to NAWASA's billing system, so I can't check individual account balances — please call 440-2155 or visit a NAWASA office for that."
+    "answer": "I'm not connected to NAWASA's billing system, so I can't check individual account balances — please call 440-2155 or visit a NAWASA office for that.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Why is my bill higher this month?",
-    "answer": "I don't have access to individual billing details — please contact the hotline at 440-2155 to review your specific bill."
+    "answer": "I don't have access to individual billing details — please contact the hotline at 440-2155 to review your specific bill.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Household Customer"
   },
   {
     "question": "Does this chatbot work during a hurricane?",
-    "answer": "I can still answer general NAWASA questions during a hurricane, but for urgent, storm-related outages or emergencies, please call the hotline at 440-2155 or 911."
+    "answer": "I can still answer general NAWASA questions during a hurricane, but for urgent, storm-related outages or emergencies, please call the hotline at 440-2155 or 911.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "All personas"
+  },
+  {
+    "question": "What deposit does a business need to pay for a new connection?",
+    "answer": "For non-domestic (commercial) properties, the deposit is $340, compared to $240 for domestic properties.",
+    "source": "https://nawasa.gd/images/Rates_and_Charges_Regulations.pdf — live-checked 2026-07-24",
+    "owner": "NAWASA (official gazetted regulation)",
+    "persona": "Commercial/Business Customer"
+  },
+  {
+    "question": "How is the sewerage rate calculated for a business?",
+    "answer": "For non-domestic properties, the sewerage rate is two thirds of the monthly water rate, compared to one third for domestic properties.",
+    "source": "https://nawasa.gd/images/Rates_and_Charges_Regulations.pdf — live-checked 2026-07-24",
+    "owner": "NAWASA (official gazetted regulation)",
+    "persona": "Commercial/Business Customer"
+  },
+  {
+    "question": "What's the reconnection fee for a commercial property?",
+    "answer": "The reconnection fee for non-domestic properties is $150, compared to $75 for domestic properties.",
+    "source": "https://nawasa.gd/images/Rates_and_Charges_Regulations.pdf — live-checked 2026-07-24",
+    "owner": "NAWASA (official gazetted regulation)",
+    "persona": "Commercial/Business Customer"
+  },
+  {
+    "question": "Can I manage multiple business properties through this chatbot?",
+    "answer": "This chatbot doesn't have access to individual account or property records — for managing multiple commercial accounts, please contact the hotline or your nearest NAWASA office.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Commercial/Business Customer"
+  },
+  {
+    "question": "My restaurant lost water service — how urgent is this treated?",
+    "answer": "Please report it immediately via the hotline or WhatsApp — NAWASA doesn't publicly list different urgency tiers for business vs. residential outages, so report it the same way and stress the business impact when you call.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Commercial/Business Customer"
+  },
+  {
+    "question": "Are business water rates different from household rates?",
+    "answer": "Yes — non-domestic (commercial) properties have a higher deposit ($340 vs $240) and a higher sewerage rate proportion (two thirds vs one third of the water rate) than domestic properties.",
+    "source": "https://nawasa.gd/images/Rates_and_Charges_Regulations.pdf — live-checked 2026-07-24",
+    "owner": "NAWASA (official gazetted regulation)",
+    "persona": "Commercial/Business Customer"
+  },
+  {
+    "question": "Can I get an itemized invoice for my business account?",
+    "answer": "This chatbot can't generate or access individual invoices — please contact the hotline or visit a NAWASA office for detailed billing documents.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Commercial/Business Customer"
+  },
+  {
+    "question": "Who do I talk to about a commercial billing dispute?",
+    "answer": "Please contact the NAWASA hotline or visit your nearest office to raise a billing dispute — this chatbot can't adjudicate account-specific issues.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Commercial/Business Customer"
+  },
+  {
+    "question": "Does NAWASA offer payment plans for businesses behind on their bill?",
+    "answer": "This chatbot doesn't have confirmed details on business-specific payment plans — please contact the hotline to discuss your options directly with staff.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Commercial/Business Customer"
+  },
+  {
+    "question": "What happens if my business is disconnected for non-payment?",
+    "answer": "Service may be disconnected once arrears reach the minimum threshold and are 30+ days overdue, and NAWASA may discontinue service without further notice past that point. Reconnection for a non-domestic property costs $150.",
+    "source": "https://nawasa.gd/images/Rates_and_Charges_Regulations.pdf — live-checked 2026-07-24",
+    "owner": "NAWASA (official gazetted regulation)",
+    "persona": "Commercial/Business Customer"
+  },
+  {
+    "question": "I'm building a new house — how do I get water service set up?",
+    "answer": "You'll need to fill out an application for a new service connection, following NAWASA's Requirements for Private Water Service and Terms and Conditions for Water Service.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "New Connection Applicant"
+  },
+  {
+    "question": "What documents do I need to apply for a new water connection?",
+    "answer": "This chatbot doesn't have the full document checklist confirmed — please contact the hotline or visit a NAWASA office to get the exact list of requirements for your property.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "New Connection Applicant"
+  },
+  {
+    "question": "How much will my new connection actually cost?",
+    "answer": "There are two different published figures, so please confirm directly with NAWASA staff: the FAQ page lists $75 (½\"), $125 (¾\"), $175 (1\"), $420 (1¼\"–2\"), or $1,000 (4\"); the 2010 gazetted regulation lists $80 (½\"), $120 (¾\"), $175 (1\"), $420 (1½\"–2\"), $1,000 (2½\"–3\"), $1,200 (4\"), or $1,500 (over 4\"). Additional variable costs like transportation, pipes/fittings, and VAT may also apply.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "New Connection Applicant"
+  },
+  {
+    "question": "How long does it take to get a new connection installed?",
+    "answer": "This chatbot doesn't have a confirmed installation timeline — please contact the hotline or your nearest office for an estimate specific to your property and territory.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "New Connection Applicant"
+  },
+  {
+    "question": "Do I need to pay a deposit when applying for new service?",
+    "answer": "Yes — per the 2010 regulation, the deposit is $240 for domestic properties and $340 for non-domestic properties.",
+    "source": "https://nawasa.gd/images/Rates_and_Charges_Regulations.pdf — live-checked 2026-07-24",
+    "owner": "NAWASA (official gazetted regulation)",
+    "persona": "New Connection Applicant"
+  },
+  {
+    "question": "Which NAWASA office handles new connection applications in my area?",
+    "answer": "That depends on your territory: Grenada applications may go through Grenville, Gouyave, or Dusty Highway sub-offices depending on location; Carriacou applications go through the Hillsborough office.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "New Connection Applicant"
+  },
+  {
+    "question": "Is the pipe size my choice, or does NAWASA decide it?",
+    "answer": "This chatbot doesn't have confirmed details on how pipe size is determined — please ask NAWASA staff directly, since it affects your connection cost.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "New Connection Applicant"
+  },
+  {
+    "question": "What happens after I submit a new connection application?",
+    "answer": "This chatbot doesn't have the confirmed next-steps process — please contact the hotline or your nearest office to find out what to expect after applying.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "New Connection Applicant"
+  },
+  {
+    "question": "Can I get a cost estimate before I commit to applying?",
+    "answer": "Yes, using the published fee tables as a general guide — but since two different fee tables exist and are unreconciled, please confirm the current, authoritative figure with NAWASA staff before budgeting.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "New Connection Applicant"
+  },
+  {
+    "question": "Is there a difference in the process between Grenada and Carriacou?",
+    "answer": "This chatbot doesn't have confirmed process differences by territory — please contact the hotline or the relevant sub-office (Hillsborough for Carriacou) to confirm.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "New Connection Applicant"
+  },
+  {
+    "question": "Can you explain this in a simpler way?",
+    "answer": "Of course — happy to slow down. What question can I help you with, and I'll walk through it step by step?",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Elderly/Vulnerable Customer"
+  },
+  {
+    "question": "I don't understand this chat thing, can I just call someone?",
+    "answer": "That's completely fine — you can call the NAWASA hotline at 440-2155, or WhatsApp 405 5245 / 459 6064 / 405 9143, and speak with someone directly.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Elderly/Vulnerable Customer"
+  },
+  {
+    "question": "Can my daughter help me with this and talk to you for me?",
+    "answer": "Yes, that's fine — she's welcome to type on your behalf, or you can both call the hotline together.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Elderly/Vulnerable Customer"
+  },
+  {
+    "question": "Can you read the answer out loud instead of just typing it?",
+    "answer": "Yes — there's a \"Read replies aloud\" option in the sidebar settings. Turn that on and I'll speak my replies as well as typing them.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Elderly/Vulnerable Customer"
+  },
+  {
+    "question": "I'm worried I'll do something wrong on this chat, is that okay?",
+    "answer": "There's nothing you can break by chatting here — take your time, and if something isn't clear, just ask me to explain it again.",
+    "source": "W.E.S. system design — describes this app's own features/limitations, not a NAWASA-published fact",
+    "owner": "W.E.S. project pod",
+    "persona": "Elderly/Vulnerable Customer"
+  },
+  {
+    "question": "Why is my bill different this month, in simple terms?",
+    "answer": "In simple terms: it's usually one of a few things — an estimated bill, a leak, a tap left on somewhere, or a meter issue. The easiest check is to turn off every tap in the house and watch the meter dial — if it's still moving, there's likely a leak.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Elderly/Vulnerable Customer"
+  },
+  {
+    "question": "I don't have a smartphone, how else can I reach NAWASA?",
+    "answer": "You can call the hotline at 440-2155, or visit a NAWASA office in person — Main Office at The Carenage, St. George's, or a sub-office in Grenville, Gouyave, Dusty Highway, or Hillsborough (Carriacou).",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Elderly/Vulnerable Customer"
+  },
+  {
+    "question": "Can someone come to my house to help me understand my bill?",
+    "answer": "This chatbot can't arrange home visits — please call the hotline to ask whether that kind of support is available.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "Elderly/Vulnerable Customer"
+  },
+  {
+    "question": "deposit domestic vs non-domestic",
+    "answer": "Domestic: $240. Non-domestic: $340. (Source: 2010 gazetted Rates and Charges Regulation.)",
+    "source": "https://nawasa.gd/images/Rates_and_Charges_Regulations.pdf — live-checked 2026-07-24",
+    "owner": "NAWASA (official gazetted regulation)",
+    "persona": "NAWASA Customer Service Agent"
+  },
+  {
+    "question": "reconnection fee",
+    "answer": "Domestic: $75. Non-domestic: $150. (Source: 2010 gazetted Rates and Charges Regulation.)",
+    "source": "https://nawasa.gd/images/Rates_and_Charges_Regulations.pdf — live-checked 2026-07-24",
+    "owner": "NAWASA (official gazetted regulation)",
+    "persona": "NAWASA Customer Service Agent"
+  },
+  {
+    "question": "disconnection threshold",
+    "answer": "Minimum $50 in arrears, at least 30 days overdue (per FAQ page). Regulation also allows discontinuation without further notice once 30+ days overdue on any balance.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "NAWASA Customer Service Agent"
+  },
+  {
+    "question": "sewerage rate formula",
+    "answer": "Domestic = 1/3 of monthly water rate. Non-domestic = 2/3 of monthly water rate. (Source: 2010 gazetted Rates and Charges Regulation.)",
+    "source": "https://nawasa.gd/images/Rates_and_Charges_Regulations.pdf — live-checked 2026-07-24",
+    "owner": "NAWASA (official gazetted regulation)",
+    "persona": "NAWASA Customer Service Agent"
+  },
+  {
+    "question": "both connection fee tables",
+    "answer": "FAQ page: ½\"=$75, ¾\"=$125, 1\"=$175, 1¼\"–2\"=$420, 4\"=$1,000. 2010 regulation: ½\"=$80, ¾\"=$120, 1\"=$175, 1½\"–2\"=$420, 2½\"–3\"=$1,000, 4\"=$1,200, over 4\"=$1,500. UNRECONCILED — confirm with billing before quoting to a customer.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "NAWASA Customer Service Agent"
+  },
+  {
+    "question": "billing due date and interest",
+    "answer": "Due within 30 days of issue. 1% interest per month on amounts overdue past 30 days.",
+    "source": "https://nawasa.gd/images/Rates_and_Charges_Regulations.pdf — live-checked 2026-07-24",
+    "owner": "NAWASA (official gazetted regulation)",
+    "persona": "NAWASA Customer Service Agent"
+  },
+  {
+    "question": "hotline and whatsapp numbers",
+    "answer": "Hotline: (473) 440-2155. WhatsApp: 405 5245 / 459 6064 / 405 9143.",
+    "source": "https://www.nawasa.gd/ — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "NAWASA Customer Service Agent"
+  },
+  {
+    "question": "leak self-check steps for customer",
+    "answer": "1) All taps off. 2) Watch meter dial. 3) Dial moving = leak, advise reporting via hotline/WhatsApp/portal. 4) Dial still = check estimated bill, outdoor tap, or meter fault.",
+    "source": "W.E.S. project pod — general NAWASA service knowledge, not individually confirmed against a live NAWASA source",
+    "owner": "W.E.S. project pod",
+    "persona": "NAWASA Customer Service Agent"
+  },
+  {
+    "question": "Can I pay my bill at a payment center?",
+    "answer": "Yes, payment centers include Grenada Co-operative Bank, Western Union, RBTT Bank, and River Sallee Co-operative Credit Union.",
+    "source": "https://www.nawasa.gd/customer-care/bill-payment-options — live-checked 2026-07-24",
+    "owner": "NAWASA (official site)",
+    "persona": "Household Customer"
   }
 ]
