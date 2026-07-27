@@ -19,10 +19,97 @@ import os
 import random
 import string
 import base64
+import json
+import re
+import math
+import io
+from collections import Counter
 from pathlib import Path
 import streamlit as st
 from google import genai
 from google.genai import types
+
+try:
+    from gtts import gTTS
+    GTTS_AVAILABLE = True
+except ImportError:
+    GTTS_AVAILABLE = False
+
+# gTTS language codes for each supported app language. Kreyòl (Haitian
+# Creole) has no native gTTS voice, so it falls back to French pronunciation
+# as the closest approximation — not perfect, but far better than nothing.
+LANG_TO_TTS_CODE = {
+    "English": "en",
+    "Spanish": "es",
+    "French": "fr",
+    "Kreyòl": "fr",   # closest available fallback, not a true Kreyòl voice
+    "Chinese": "zh-CN",
+}
+
+
+def synthesize_speech(text, lang_code):
+    """Converts text to MP3 audio bytes via gTTS. Returns None on any
+    failure (no internet, unsupported text, etc.) so a TTS hiccup never
+    breaks the chat reply itself."""
+    if not GTTS_AVAILABLE or not text.strip():
+        return None
+    try:
+        buf = io.BytesIO()
+        gTTS(text=text, lang=lang_code).write_to_fp(buf)
+        buf.seek(0)
+        return buf.read()
+    except Exception:
+        return None
+
+
+# ---------------------------------------------------------------------------
+# RAG-lite: ground answers in the real, verified NAWASA Q&A dataset before
+# calling Gemini. Pure-Python cosine similarity over word counts — no extra
+# dependencies (numpy/sklearn) required, so nothing new to pip install.
+# ---------------------------------------------------------------------------
+# near-exact match -> answer instantly, skip Gemini call (saves quota, guarantees accuracy)
+RAG_HIGH_CONFIDENCE = 0.65
+# weaker match -> still pass to Gemini as grounding context
+RAG_CONTEXT_THRESHOLD = 0.20
+
+
+def _tokenize(text):
+    return re.findall(r"[a-z0-9']+", text.lower())
+
+
+def _cosine_sim(a_tokens, b_tokens):
+    a_counts, b_counts = Counter(a_tokens), Counter(b_tokens)
+    common = set(a_counts) & set(b_counts)
+    dot = sum(a_counts[w] * b_counts[w] for w in common)
+    mag_a = math.sqrt(sum(v * v for v in a_counts.values()))
+    mag_b = math.sqrt(sum(v * v for v in b_counts.values()))
+    if mag_a == 0 or mag_b == 0:
+        return 0.0
+    return dot / (mag_a * mag_b)
+
+
+@st.cache_data
+def load_qa_dataset():
+    """Loads wes_qa_dataset.json from the app folder. Returns [] if missing
+    so the app still runs (just without RAG grounding) rather than crashing."""
+    dataset_path = Path(__file__).resolve().parent / "wes_qa_dataset.json"
+    if not dataset_path.exists():
+        return []
+    with open(dataset_path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def retrieve_matches(query, qa_data, top_k=3):
+    """Returns up to top_k (similarity, {question, answer}) pairs, sorted
+    highest similarity first."""
+    if not qa_data:
+        return []
+    q_tokens = _tokenize(query)
+    scored = [(_cosine_sim(q_tokens, _tokenize(item["question"])), item)
+              for item in qa_data]
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return scored[:top_k]
+
 
 # Only languages with a COMPLETE translation table below are offered.
 # Adding a language to this list without a matching TRANSLATIONS entry
@@ -53,6 +140,7 @@ TRANSLATIONS = {
         "field_worker": "Field Worker",
         "sidebar_select_territory": "Select Territory",
         "sidebar_clear_chat": "Clear Chat",
+        "voice_toggle_label": "🔊 Read replies aloud",
         "api_key_required": "Please enter your Gemini API key in the sidebar to start chatting.",
         "chat_input_placeholder": "Type your message here...",
         "field_worker_upload": "Upload a photo of a water meter or tank gauge",
@@ -117,6 +205,7 @@ TRANSLATIONS = {
         "field_worker": "Trabajador de campo",
         "sidebar_select_territory": "Seleccionar territorio",
         "sidebar_clear_chat": "Borrar chat",
+        "voice_toggle_label": "🔊 Leer respuestas en voz alta",
         "api_key_required": "Ingrese su clave API de Gemini en la barra lateral para comenzar a chatear.",
         "chat_input_placeholder": "Escribe tu mensaje aquí...",
         "field_worker_upload": "Cargue una foto de un medidor de agua o un indicador de tanque",
@@ -159,6 +248,7 @@ TRANSLATIONS = {
         "field_worker": "Agent de terrain",
         "sidebar_select_territory": "Sélectionner le territoire",
         "sidebar_clear_chat": "Effacer le chat",
+        "voice_toggle_label": "🔊 Lire les réponses à voix haute",
         "api_key_required": "Veuillez entrer votre clé API Gemini dans la barre latérale pour commencer à discuter.",
         "chat_input_placeholder": "Tapez votre message ici...",
         "field_worker_upload": "Téléchargez une photo d'un compteur d'eau ou d'un indicateur de réservoir",
@@ -201,6 +291,7 @@ TRANSLATIONS = {
         "field_worker": "Travayè sou teren",
         "sidebar_select_territory": "Chwazi teritwa",
         "sidebar_clear_chat": "Efase chat",
+        "voice_toggle_label": "🔊 Li repons yo awotvwa",
         "api_key_required": "Tanpri antre kle API Gemini ou nan ba bò a pou kòmanse chat la.",
         "chat_input_placeholder": "Ekri mesaj ou isit la...",
         "field_worker_upload": "Telechaje yon foto yon kontè dlo oswa yon endikatè rezèvwa",
@@ -243,6 +334,7 @@ TRANSLATIONS = {
         "field_worker": "现场工作人员",
         "sidebar_select_territory": "选择地区",
         "sidebar_clear_chat": "清除聊天",
+        "voice_toggle_label": "🔊 朗读回复",
         "api_key_required": "请在侧边栏中输入您的 Gemini API 密钥以开始聊天。",
         "chat_input_placeholder": "在此输入您的消息...",
         "field_worker_upload": "上传水表或水箱仪表的照片",
@@ -274,11 +366,14 @@ TRANSLATIONS = {
 
 language = "English"
 
+
 def t(key: str, **kwargs) -> str:
     # FIX (bug #1): defensive against a language in LANGUAGES that has no
     # matching TRANSLATIONS entry — falls back to English instead of a
     # hard KeyError crash. Also guards the inner key lookup the same way.
     selected_language = globals().get("language", "English")
+    if not isinstance(selected_language, str):
+        selected_language = "English"
     lang_table = TRANSLATIONS.get(selected_language, TRANSLATIONS["English"])
     text = lang_table.get(key, TRANSLATIONS["English"].get(key, key))
     return text.format(**kwargs)
@@ -473,6 +568,11 @@ if st.sidebar.button(t("sidebar_clear_chat")):
     st.session_state.messages = []
     st.rerun()
 
+voice_enabled = st.sidebar.checkbox(t("voice_toggle_label"), value=False)
+if voice_enabled and not GTTS_AVAILABLE:
+    st.sidebar.warning(
+        "gTTS isn't installed — add `gTTS` to requirements.txt to enable voice replies.")
+
 st.sidebar.caption("☎ Hotline: 440-2155")
 st.sidebar.caption("📱 WhatsApp: 405 5245 / 459 6064 / 405 9143")
 st.sidebar.caption(
@@ -587,79 +687,125 @@ if prompt:
         if image_bytes:
             st.image(image_bytes, width=250)
 
+    # RAG-lite: check the verified Q&A dataset before touching the Gemini API.
+    # A photo attached means this is a vision task Gemini alone can do, so
+    # retrieval is skipped in that case.
+    qa_data = load_qa_dataset()
+    rag_matches = [] if image_bytes else retrieve_matches(
+        prompt, qa_data, top_k=3)
+    top_sim, top_item = (rag_matches[0] if rag_matches else (0.0, None))
+
     with st.chat_message("assistant"):
-        with st.spinner(t("thinking_spinner")):
-            try:
-                client = genai.Client(api_key=api_key_input)
+        if top_sim >= RAG_HIGH_CONFIDENCE:
+            # Near-exact match to a verified FAQ — answer instantly, no API
+            # call needed. Faster, free, and guaranteed accurate.
+            bot_reply = top_item["answer"] + \
+                "\n\n*(Answered instantly from NAWASA's verified FAQ.)*"
+            st.markdown(bot_reply)
+            st.session_state.messages.append(
+                {"role": "assistant", "content": bot_reply})
+            if voice_enabled:
+                audio_bytes = synthesize_speech(
+                    top_item["answer"], LANG_TO_TTS_CODE.get(language, "en"))
+                if audio_bytes:
+                    st.audio(audio_bytes, format="audio/mp3")
+        else:
+            with st.spinner(t("thinking_spinner")):
+                try:
+                    client = genai.Client(api_key=api_key_input)
 
-                # Build full chat history for Gemini so it has conversational memory
-                contents = []
-                for m in st.session_state.messages:
-                    role = "user" if m["role"] == "user" else "model"
-                    parts = [types.Part.from_text(text=m["content"])]
-                    if m.get("image") and role == "user":
-                        parts.append(
-                            types.Part.from_bytes(
-                                data=m["image"], mime_type=image_mime or "image/jpeg")
+                    # Build full chat history for Gemini so it has conversational memory
+                    contents = []
+                    for m in st.session_state.messages:
+                        role = "user" if m["role"] == "user" else "model"
+                        parts = [types.Part.from_text(text=m["content"])]
+                        if m.get("image") and role == "user":
+                            parts.append(
+                                types.Part.from_bytes(
+                                    data=m["image"], mime_type=image_mime or "image/jpeg")
+                            )
+                        contents.append(types.Content(role=role, parts=parts))
+
+                    mode_note = (
+                        f"\n{t('field_worker_mode_note')}"
+                        if user_mode == "Field Worker"
+                        else f"\n{t('customer_mode_note')}"
+                    )
+
+                    language_instruction = t("assistant_language_instruction")
+
+                    # FIX (bug #2, part B): .format(ref_code=...) actually fills
+                    # in the real per-session code now, instead of the literal
+                    # "{ref_code}" text leaking straight into Gemini's instructions.
+                    filled_system_instruction = SYSTEM_INSTRUCTION_TEMPLATE.format(
+                        ref_code=st.session_state.ref_code
+                    )
+
+                    # RAG grounding: pass any decent (but not instant-confidence)
+                    # matches from the verified dataset as reference context,
+                    # so Gemini's answer stays anchored to real facts instead
+                    # of only what's baked into the static fact sheet.
+                    rag_context = ""
+                    relevant = [(s, i)
+                                for s, i in rag_matches if s >= RAG_CONTEXT_THRESHOLD]
+                    if relevant:
+                        lines = "\n".join(
+                            f'- Q: {i["question"]}\n  A: {i["answer"]}' for _, i in relevant
                         )
-                    contents.append(types.Content(role=role, parts=parts))
+                        rag_context = (
+                            "\n\nRetrieved reference facts from NAWASA's verified FAQ dataset "
+                            "(use these if relevant to the user's question; ignore if not relevant):\n"
+                            + lines
+                        )
 
-                mode_note = (
-                    f"\n{t('field_worker_mode_note')}"
-                    if user_mode == "Field Worker"
-                    else f"\n{t('customer_mode_note')}"
-                )
+                    config = types.GenerateContentConfig(
+                        system_instruction=filled_system_instruction
+                        + f"\n{t('territory_note', territory=territory)}"
+                        + mode_note
+                        + f"\n{language_instruction}"
+                        + rag_context,
+                        temperature=0.7,
+                    )
 
-                language_instruction = t("assistant_language_instruction")
+                    response = client.models.generate_content(
+                        model="gemini-flash-latest",
+                        contents=contents,
+                        config=config,
+                    )
 
-                # FIX (bug #2, part B): .format(ref_code=...) actually fills
-                # in the real per-session code now, instead of the literal
-                # "{ref_code}" text leaking straight into Gemini's instructions.
-                filled_system_instruction = SYSTEM_INSTRUCTION_TEMPLATE.format(
-                    ref_code=st.session_state.ref_code
-                )
+                    bot_reply = response.text
+                    st.markdown(bot_reply)
+                    st.session_state.messages.append(
+                        {"role": "assistant", "content": bot_reply})
+                    if voice_enabled:
+                        audio_bytes = synthesize_speech(
+                            bot_reply, LANG_TO_TTS_CODE.get(language, "en"))
+                        if audio_bytes:
+                            st.audio(audio_bytes, format="audio/mp3")
 
-                config = types.GenerateContentConfig(
-                    system_instruction=filled_system_instruction
-                    + f"\n{t('territory_note', territory=territory)}"
-                    + mode_note
-                    + f"\n{language_instruction}",
-                    temperature=0.7,
-                )
-
-                response = client.models.generate_content(
-                    model="gemini-flash-latest",
-                    contents=contents,
-                    config=config,
-                )
-
-                bot_reply = response.text
-                st.markdown(bot_reply)
-                st.session_state.messages.append(
-                    {"role": "assistant", "content": bot_reply})
-
-            except Exception as e:
-                error_message = str(e)
-                if hasattr(e, "error") and isinstance(e.error, dict):
-                    err = e.error
-                    error_message = err.get("message", error_message)
-
-                is_quota_error = (
-                    "RESOURCE_EXHAUSTED" in error_message
-                    or "quota" in error_message.lower()
-                    or "limit" in error_message.lower()
-                )
-
-                if is_quota_error:
-                    st.error(t("quota_error", ref_code=st.session_state.ref_code))
-                else:
-                    retry_hint = ""
+                except Exception as e:
+                    error_message = str(e)
                     if hasattr(e, "error") and isinstance(e.error, dict):
-                        for detail in e.error.get("details", []):
-                            if isinstance(detail, dict) and detail.get("@type", "").endswith("RetryInfo"):
-                                retry_delay = detail.get("retryDelay")
-                                if retry_delay:
-                                    retry_hint = t(
-                                        "retry_hint", retry_delay=retry_delay)
-                    st.error(t("gemini_error", error=error_message,
-                             retry_hint=retry_hint))
+                        err = e.error
+                        error_message = err.get("message", error_message)
+
+                    is_quota_error = (
+                        "RESOURCE_EXHAUSTED" in error_message
+                        or "quota" in error_message.lower()
+                        or "limit" in error_message.lower()
+                    )
+
+                    if is_quota_error:
+                        st.error(
+                            t("quota_error", ref_code=st.session_state.ref_code))
+                    else:
+                        retry_hint = ""
+                        if hasattr(e, "error") and isinstance(e.error, dict):
+                            for detail in e.error.get("details", []):
+                                if isinstance(detail, dict) and detail.get("@type", "").endswith("RetryInfo"):
+                                    retry_delay = detail.get("retryDelay")
+                                    if retry_delay:
+                                        retry_hint = t(
+                                            "retry_hint", retry_delay=retry_delay)
+                        st.error(
+                            t("gemini_error", error=error_message, retry_hint=retry_hint))
