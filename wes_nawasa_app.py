@@ -136,18 +136,26 @@ TRANSLATIONS = {
             "so every visitor must provide their own key."
         ),
         "sidebar_i_am_a": "I am a...",
-        "customer": "Customer",
+        "household_customer": "Household Customer",
+        "business_customer": "Business / Commercial Customer",
+        "new_connection_applicant": "New Connection Applicant",
         "field_worker": "Field Worker",
+        "nawasa_staff": "NAWASA Staff",
         "sidebar_select_territory": "Select Territory",
         "sidebar_clear_chat": "Clear Chat",
         "voice_toggle_label": "🔊 Read replies aloud",
+        "simple_replies_toggle": "🐢 Simple, unhurried replies",
         "api_key_required": "Please enter your Gemini API key in the sidebar to start chatting.",
         "chat_input_placeholder": "Type your message here...",
         "field_worker_upload": "Upload a photo of a water meter or tank gauge",
         "auto_read_prompt": "Please read the meter/tank value from the photo I uploaded.",
         "thinking_spinner": "W.E.S. is thinking...",
-        "field_worker_mode_note": "Note: This user is a NAWASA field worker in Field Worker mode.",
-        "customer_mode_note": "Note: This user is a customer.",
+        "household_customer_mode_note": "Note: This user is a household customer. Use a warm, patient, reassuring tone, and acknowledge stress before delivering facts if their message reads as urgent (a leak, a high bill, a disconnection notice).",
+        "business_customer_mode_note": "Note: This user is a business/commercial customer on NAWASA's non-domestic rate tier (higher deposit than domestic, and sewerage billed at two-thirds of the water rate instead of one-third). Use a more formal, transactional tone, and lead with continuity-focused, predictable answers — a disconnection threatens their operations, not just personal comfort.",
+        "new_connection_applicant_mode_note": "Note: This user is not yet a NAWASA customer — they're asking about getting a new service connection. Explain the process from zero, assume no familiarity with NAWASA terminology, and be explicit that two different connection-fee tables exist so they don't budget off just one number.",
+        "field_worker_mode_note": "Note: This user is a NAWASA field worker in Field Worker mode. Keep replies brisk and efficient — they're time-pressured, moving between properties in the field.",
+        "nawasa_staff_mode_note": "Note: This user is NAWASA's own customer service staff, using W.E.S. as an internal lookup tool while a customer waits on the line. Skip conversational padding — answer with the fastest, most complete correct information, formatted for reading straight back to a customer, and include both conflicting fee tables at once if the question touches connection fees.",
+        "simple_replies_instruction": "The user has asked for simple, unhurried, plain-language replies: avoid jargon, keep sentences short, confirm understanding, and be extra patient and reassuring regardless of their selected role above.",
         "territory_note": "Note: The user is asking specifically regarding {territory}.",
         "retry_hint": " Please retry after {retry_delay}.",
         "assistant_language_instruction": "Always answer the user's messages in English.",
@@ -159,6 +167,11 @@ TRANSLATIONS = {
             "Hello! I'm W.E.S. — Field Worker mode for {territory}. "
             "Upload a photo of a water meter or tank gauge below and I'll read the value for you, "
             "or ask me anything else about NAWASA operations."
+        ),
+        "greeting_staff": (
+            "W.E.S. ready — internal lookup mode for {territory}. "
+            "Ask me anything about NAWASA policy, fees, or procedures and I'll give you the fastest "
+            "correct answer to read back to your customer."
         ),
         "faq_title": "Frequently Asked Questions",
         "faq_intro": "Common NAWASA questions and answers about new service connections, billing, leaks, and disconnection.",
@@ -201,18 +214,26 @@ TRANSLATIONS = {
             "así que cada visitante debe proporcionar su propia clave."
         ),
         "sidebar_i_am_a": "Soy un...",
-        "customer": "Cliente",
+        "household_customer": "Cliente Doméstico",
+        "business_customer": "Cliente Comercial / Empresarial",
+        "new_connection_applicant": "Solicitante de Nueva Conexión",
         "field_worker": "Trabajador de campo",
+        "nawasa_staff": "Personal de NAWASA",
         "sidebar_select_territory": "Seleccionar territorio",
         "sidebar_clear_chat": "Borrar chat",
         "voice_toggle_label": "🔊 Leer respuestas en voz alta",
+        "simple_replies_toggle": "🐢 Respuestas simples y sin prisa",
         "api_key_required": "Ingrese su clave API de Gemini en la barra lateral para comenzar a chatear.",
         "chat_input_placeholder": "Escribe tu mensaje aquí...",
         "field_worker_upload": "Cargue una foto de un medidor de agua o un indicador de tanque",
         "auto_read_prompt": "Por favor, lea el valor del medidor/reservorio de la foto que cargué.",
         "thinking_spinner": "W.E.S. está pensando...",
-        "field_worker_mode_note": "Nota: Este usuario es un trabajador de campo de NAWASA en modo Trabajador de campo.",
-        "customer_mode_note": "Nota: Este usuario es un cliente.",
+        "household_customer_mode_note": "Nota: Este usuario es un cliente doméstico. Use un tono cálido, paciente y tranquilizador, y reconozca el estrés antes de dar los datos si el mensaje suena urgente (una fuga, una factura alta, un aviso de desconexión).",
+        "business_customer_mode_note": "Nota: Este usuario es un cliente comercial/empresarial en el nivel de tarifa no doméstica de NAWASA (depósito más alto que el doméstico, y el alcantarillado se factura a dos tercios de la tarifa de agua en lugar de un tercio). Use un tono más formal y transaccional, y priorice respuestas centradas en la continuidad y previsibilidad — una desconexión amenaza sus operaciones, no solo la comodidad personal.",
+        "new_connection_applicant_mode_note": "Nota: Este usuario todavía no es cliente de NAWASA — está preguntando sobre cómo obtener una nueva conexión de servicio. Explique el proceso desde cero, no asuma familiaridad con la terminología de NAWASA, y sea explícito en que existen dos tablas diferentes de tarifas de conexión para que no calcule su presupuesto con un solo número.",
+        "field_worker_mode_note": "Nota: Este usuario es un trabajador de campo de NAWASA en modo Trabajador de campo. Mantenga las respuestas breves y eficientes — está bajo presión de tiempo, moviéndose entre propiedades en el campo.",
+        "nawasa_staff_mode_note": "Nota: Este usuario es personal del propio servicio al cliente de NAWASA, usando W.E.S. como herramienta de consulta interna mientras un cliente espera en línea. Evite relleno conversacional — responda con la información correcta más completa y rápida, en un formato listo para leer directamente al cliente, e incluya ambas tablas de tarifas en conflicto si la pregunta trata sobre tarifas de conexión.",
+        "simple_replies_instruction": "El usuario ha pedido respuestas simples, sin prisa y en lenguaje sencillo: evite la jerga, use oraciones cortas, confirme que se entendió, y sea especialmente paciente y tranquilizador, sin importar el rol seleccionado arriba.",
         "territory_note": "Nota: El usuario está consultando específicamente sobre {territory}.",
         "retry_hint": " Por favor, vuelva a intentarlo después de {retry_delay}.",
         "assistant_language_instruction": "Responda siempre a los mensajes del usuario en español.",
@@ -224,6 +245,11 @@ TRANSLATIONS = {
             "¡Hola! Estoy en modo Trabajador de campo para {territory}. "
             "Cargue una foto de un medidor de agua o un indicador de tanque a continuación y leeré el valor para usted, "
             "o pregúnteme cualquier otra cosa sobre las operaciones de NAWASA."
+        ),
+        "greeting_staff": (
+            "W.E.S. listo — modo de consulta interna para {territory}. "
+            "Pregúnteme lo que necesite sobre políticas, tarifas o procedimientos de NAWASA y le daré "
+            "la respuesta correcta más rápida para leerla a su cliente."
         ),
         "quota_error": (
             "Estoy recibiendo más solicitudes de las que puedo manejar en este momento (hemos alcanzado el límite de uso gratuito de hoy). "
@@ -266,18 +292,26 @@ TRANSLATIONS = {
             "donc chaque visiteur doit fournir sa propre clé."
         ),
         "sidebar_i_am_a": "Je suis un...",
-        "customer": "Client",
+        "household_customer": "Client résidentiel",
+        "business_customer": "Client commercial / entreprise",
+        "new_connection_applicant": "Demandeur de nouvelle connexion",
         "field_worker": "Agent de terrain",
+        "nawasa_staff": "Personnel de NAWASA",
         "sidebar_select_territory": "Sélectionner le territoire",
         "sidebar_clear_chat": "Effacer le chat",
         "voice_toggle_label": "🔊 Lire les réponses à voix haute",
+        "simple_replies_toggle": "🐢 Réponses simples et sans hâte",
         "api_key_required": "Veuillez entrer votre clé API Gemini dans la barre latérale pour commencer à discuter.",
         "chat_input_placeholder": "Tapez votre message ici...",
         "field_worker_upload": "Téléchargez une photo d'un compteur d'eau ou d'un indicateur de réservoir",
         "auto_read_prompt": "Veuillez lire la valeur du compteur/réservoir à partir de la photo que j'ai téléchargée.",
         "thinking_spinner": "W.E.S. réfléchit...",
-        "field_worker_mode_note": "Remarque : Cet utilisateur est un agent de terrain de NAWASA en mode Agent de terrain.",
-        "customer_mode_note": "Remarque : Cet utilisateur est un client.",
+        "household_customer_mode_note": "Remarque : Cet utilisateur est un client résidentiel. Utilisez un ton chaleureux, patient et rassurant, et reconnaissez le stress avant de donner les faits si le message semble urgent (une fuite, une facture élevée, un avis de déconnexion).",
+        "business_customer_mode_note": "Remarque : Cet utilisateur est un client commercial/entreprise sur le tarif non domestique de NAWASA (dépôt plus élevé que domestique, et l'assainissement facturé aux deux tiers du tarif de l'eau au lieu d'un tiers). Utilisez un ton plus formel et transactionnel, et privilégiez des réponses axées sur la continuité et la prévisibilité — une déconnexion menace leurs activités, pas seulement leur confort personnel.",
+        "new_connection_applicant_mode_note": "Remarque : Cet utilisateur n'est pas encore client de NAWASA — il/elle se renseigne sur l'obtention d'une nouvelle connexion de service. Expliquez le processus depuis le début, ne présumez aucune familiarité avec la terminologie de NAWASA, et précisez explicitement qu'il existe deux tableaux de frais de connexion différents afin qu'il/elle ne budgétise pas sur un seul chiffre.",
+        "field_worker_mode_note": "Remarque : Cet utilisateur est un agent de terrain de NAWASA en mode Agent de terrain. Gardez les réponses brèves et efficaces — il/elle est pressé(e) par le temps, se déplaçant entre les propriétés sur le terrain.",
+        "nawasa_staff_mode_note": "Remarque : Cet utilisateur fait partie du personnel du service client de NAWASA, utilisant W.E.S. comme outil de consultation interne pendant qu'un client attend en ligne. Évitez le remplissage conversationnel — répondez avec l'information correcte la plus complète et la plus rapide, formatée pour être lue directement à un client, et incluez les deux tableaux de frais en conflit si la question porte sur les frais de connexion.",
+        "simple_replies_instruction": "L'utilisateur a demandé des réponses simples, sans hâte, en langage clair : évitez le jargon, gardez des phrases courtes, confirmez la compréhension, et soyez particulièrement patient et rassurant, quel que soit le rôle sélectionné ci-dessus.",
         "territory_note": "Remarque : L'utilisateur demande spécifiquement concernant {territory}.",
         "retry_hint": " Veuillez réessayer après {retry_delay}.",
         "assistant_language_instruction": "Répondez toujours aux messages de l'utilisateur en français.",
@@ -289,6 +323,11 @@ TRANSLATIONS = {
             "Bonjour ! Je suis en mode Agent de terrain pour {territory}. "
             "Téléchargez une photo d'un compteur d'eau ou d'un indicateur de réservoir ci-dessous et je lirai la valeur pour vous, "
             "ou posez-moi toute autre question sur les opérations de NAWASA."
+        ),
+        "greeting_staff": (
+            "W.E.S. prêt — mode de consultation interne pour {territory}. "
+            "Posez-moi toute question sur les politiques, frais ou procédures de NAWASA et je vous "
+            "donnerai la réponse correcte la plus rapide à lire à votre client."
         ),
         "quota_error": (
             "Je reçois plus de demandes que je ne peux en traiter en ce moment (nous avons atteint la limite d'utilisation gratuite d'aujourd'hui). "
@@ -331,18 +370,26 @@ TRANSLATIONS = {
             "kidonk chak vizitè dwe bay pwòp kle yo."
         ),
         "sidebar_i_am_a": "Mwen se yon...",
-        "customer": "Kliyan",
+        "household_customer": "Kliyan Kay",
+        "business_customer": "Kliyan Biznis / Komèsyal",
+        "new_connection_applicant": "Aplikan pou Nouvo Koneksyon",
         "field_worker": "Travayè sou teren",
+        "nawasa_staff": "Anplwaye NAWASA",
         "sidebar_select_territory": "Chwazi teritwa",
         "sidebar_clear_chat": "Efase chat",
         "voice_toggle_label": "🔊 Li repons yo awotvwa",
+        "simple_replies_toggle": "🐢 Repons senp, san prese",
         "api_key_required": "Tanpri antre kle API Gemini ou nan ba bò a pou kòmanse chat la.",
         "chat_input_placeholder": "Ekri mesaj ou isit la...",
         "field_worker_upload": "Telechaje yon foto yon kontè dlo oswa yon endikatè rezèvwa",
         "auto_read_prompt": "Tanpri li valè kontè/rezèvwa a nan foto mwen telechaje a.",
         "thinking_spinner": "W.E.S. ap panse...",
-        "field_worker_mode_note": "Remak: Itilizatè sa a se yon travayè sou teren NAWASA nan mòd Travayè sou teren.",
-        "customer_mode_note": "Remak: Itilizatè sa a se yon kliyan.",
+        "household_customer_mode_note": "Remak: Itilizatè sa a se yon kliyan kay. Sèvi ak yon ton cho, pasyan, e ki rasire, epi rekonèt estrès anvan ou bay enfòmasyon si mesaj la sanble ijan (yon fwit, yon gwo bòdwo, yon avi dekoneksyon).",
+        "business_customer_mode_note": "Remak: Itilizatè sa a se yon kliyan biznis/komèsyal sou nivo tarif non-domestik NAWASA a (depo pi wo pase domestik, e egou yo chaje de tyè tarif dlo a olye de yon tyè). Sèvi ak yon ton pi fòmèl, transaksyonèl, epi mete devan repons ki konsantre sou kontinwite ak previzibilite — yon dekoneksyon menase operasyon yo, pa sèlman konfò pèsonèl.",
+        "new_connection_applicant_mode_note": "Remak: Itilizatè sa a poko yon kliyan NAWASA — l ap mande sou kijan pou jwenn yon nouvo koneksyon sèvis. Eksplike pwosesis la soti nan zewo, pa sipoze li konnen tèminoloji NAWASA, epi di klèman gen de tablo frè koneksyon diferan pou li pa fè bidjè l sou yon sèl chif.",
+        "field_worker_mode_note": "Remak: Itilizatè sa a se yon travayè sou teren NAWASA nan mòd Travayè sou teren. Kenbe repons yo kout e efikas — li anba presyon tan, l ap deplase ant pwopriyete nan teren an.",
+        "nawasa_staff_mode_note": "Remak: Itilizatè sa a se pwòp anplwaye sèvis kliyan NAWASA, k ap itilize W.E.S. kòm yon zouti rechèch entèn pandan yon kliyan ap tann sou liy lan. Evite ranbi konvèsasyon — reponn ak enfòmasyon ki kòrèk, pi konplè e pi rapid, fòmate pou li dirèkteman bay yon kliyan, epi mete tou de tablo frè ki an konfli si kesyon an konsène frè koneksyon.",
+        "simple_replies_instruction": "Itilizatè a mande repons senp, san prese, an lang klè: evite jagon, kenbe fraz yo kout, konfime konpreyansyon, epi montre plis pasyans ak rasirans, kèlkeswa wòl yo chwazi anwo a.",
         "territory_note": "Remak: Itilizatè a ap mande espesyalman sou {territory}.",
         "retry_hint": " Tanpri re-eseye apre {retry_delay}.",
         "assistant_language_instruction": "Toujou reponn mesaj itilizatè a an Kreyòl.",
@@ -354,6 +401,11 @@ TRANSLATIONS = {
             "Bonjou! Mwen se W.E.S. — mòd Travayè sou teren pou {territory}. "
             "Telechaje yon foto yon kontè dlo oswa yon endikatè rezèvwa anba a e m ap li valè a pou ou, "
             "oswa mande m nenpòt lòt bagay sou operasyon NAWASA."
+        ),
+        "greeting_staff": (
+            "W.E.S. pare — mòd rechèch entèn pou {territory}. "
+            "Mande m nenpòt bagay sou politik, frè, oswa pwosedi NAWASA e m ap ba ou repons kòrèk "
+            "ki pi rapid pou li bay kliyan ou an."
         ),
         "quota_error": (
             "Mwen resevwa plis demann pase sa mwen ka jere kounye a (nou frape limit itilizasyon gratis jodi a). "
@@ -396,18 +448,26 @@ TRANSLATIONS = {
             "因此每位访客都必须提供自己的密钥。"
         ),
         "sidebar_i_am_a": "我是...",
-        "customer": "客户",
+        "household_customer": "住宅客户",
+        "business_customer": "商业/企业客户",
+        "new_connection_applicant": "新接通申请人",
         "field_worker": "现场工作人员",
+        "nawasa_staff": "NAWASA 员工",
         "sidebar_select_territory": "选择地区",
         "sidebar_clear_chat": "清除聊天",
         "voice_toggle_label": "🔊 朗读回复",
+        "simple_replies_toggle": "🐢 简单、从容的回复",
         "api_key_required": "请在侧边栏中输入您的 Gemini API 密钥以开始聊天。",
         "chat_input_placeholder": "在此输入您的消息...",
         "field_worker_upload": "上传水表或水箱仪表的照片",
         "auto_read_prompt": "请读取我上传的照片中的水表/水箱读数。",
         "thinking_spinner": "W.E.S. 正在思考...",
-        "field_worker_mode_note": "注意：该用户为 NAWASA 的现场工作人员，处于现场工作人员模式。",
-        "customer_mode_note": "注意：该用户为客户。",
+        "household_customer_mode_note": "注意：该用户是住宅客户。请使用温暖、耐心、令人安心的语气，如果信息显得紧急（漏水、高额账单、断供通知），请先安抚情绪，再给出事实。",
+        "business_customer_mode_note": "注意：该用户是使用 NAWASA 非住宅费率的商业/企业客户（押金高于住宅客户，且污水费按水费的三分之二而非三分之一计算）。请使用更正式、事务性的语气，优先给出以业务连续性和可预测性为核心的答复——断供威胁的是他们的运营，而不仅仅是个人生活的便利。",
+        "new_connection_applicant_mode_note": "注意：该用户还不是 NAWASA 的客户——他们在询问如何办理新的服务接通。请从零开始解释整个流程，不要假设对方熟悉 NAWASA 的术语，并明确说明存在两份不同的接通费用表，以免对方只按一个数字做预算。",
+        "field_worker_mode_note": "注意：该用户为 NAWASA 的现场工作人员，处于现场工作人员模式。请保持回复简洁高效——他们时间紧张，需要在多个物业之间往返。",
+        "nawasa_staff_mode_note": "注意：该用户是 NAWASA 自己的客服人员，在客户于线上等待时，将 W.E.S. 用作内部查询工具。请省去寒暄——直接给出最快、最完整、正确的信息，格式便于直接读给客户听，如果问题涉及接通费用，请同时列出两份互相冲突的费用表。",
+        "simple_replies_instruction": "用户要求简单、从容、通俗易懂的回复：避免使用术语，句子保持简短，确认对方理解，并且无论上面选择了哪种角色，都要格外耐心、令人安心。",
         "territory_note": "注意：用户正在询问关于 {territory} 的问题。",
         "retry_hint": " 请在 {retry_delay} 后重试。",
         "assistant_language_instruction": "始终用中文回复用户的消息。",
@@ -419,6 +479,11 @@ TRANSLATIONS = {
             "您好！我是 W.E.S. — {territory} 的现场工作人员模式。"
             "请上传水表或水箱仪表的照片，我会读取数值，"
             "或者您也可以询问我有关 NAWASA 运营的其他问题。"
+        ),
+        "greeting_staff": (
+            "W.E.S. 已就绪 — {territory} 内部查询模式。"
+            "请随时向我询问 NAWASA 的政策、费用或流程问题，我会给您最快、最正确的答案，"
+            "方便您直接读给客户听。"
         ),
         "quota_error": (
             "我现在收到的请求太多，无法处理（我们已达到今天的免费使用上限）。"
@@ -638,14 +703,17 @@ api_key_input = st.sidebar.text_input(
     help=t("sidebar_api_key_help"),
 )
 
-user_mode_label = st.sidebar.radio(
-    t("sidebar_i_am_a"),
-    [t("customer"), t("field_worker")],
-)
-user_mode = "Field Worker" if user_mode_label == t(
-    "field_worker") else "Customer"
-mode_label = t(
-    "field_worker") if user_mode == "Field Worker" else t("customer")
+ROLE_KEYS = [
+    "household_customer",
+    "business_customer",
+    "new_connection_applicant",
+    "field_worker",
+    "nawasa_staff",
+]
+role_labels = [t(role_key) for role_key in ROLE_KEYS]
+selected_role_label = st.sidebar.radio(t("sidebar_i_am_a"), role_labels)
+user_mode = ROLE_KEYS[role_labels.index(selected_role_label)]
+mode_label = selected_role_label
 
 territory = st.sidebar.selectbox(
     t("sidebar_select_territory"),
@@ -660,6 +728,9 @@ voice_enabled = st.sidebar.checkbox(t("voice_toggle_label"), value=False)
 if voice_enabled and not GTTS_AVAILABLE:
     st.sidebar.warning(
         "gTTS isn't installed — add `gTTS` to requirements.txt to enable voice replies.")
+
+simple_replies_enabled = st.sidebar.checkbox(
+    t("simple_replies_toggle"), value=False)
 
 st.sidebar.caption("☎ Hotline: 440-2155")
 st.sidebar.caption("📱 WhatsApp: 405 5245 / 459 6064 / 405 9143")
@@ -730,11 +801,12 @@ if not api_key_input:
 # Initialize chat history (reset greeting if territory or mode changes on a fresh session)
 session_key = (territory, user_mode, language)
 if "messages" not in st.session_state or st.session_state.get("session_key") != session_key:
-    greeting = (
-        t("greeting_field_worker", territory=territory)
-        if user_mode == "Field Worker"
-        else t("greeting_customer", territory=territory)
-    )
+    if user_mode == "field_worker":
+        greeting = t("greeting_field_worker", territory=territory)
+    elif user_mode == "nawasa_staff":
+        greeting = t("greeting_staff", territory=territory)
+    else:
+        greeting = t("greeting_customer", territory=territory)
     st.session_state.messages = [{"role": "assistant", "content": greeting}]
     st.session_state.session_key = session_key
 
@@ -749,7 +821,7 @@ for msg in st.session_state.messages:
 # Field Worker: photo upload for meter/tank reading (computer vision)
 # ---------------------------------------------------------------------------
 uploaded_image = None
-if user_mode == "Field Worker":
+if user_mode == "field_worker":
     uploaded_image = st.file_uploader(
         t("field_worker_upload"),
         type=["png", "jpg", "jpeg"],
@@ -814,11 +886,7 @@ if prompt:
                             )
                         contents.append(types.Content(role=role, parts=parts))
 
-                    mode_note = (
-                        f"\n{t('field_worker_mode_note')}"
-                        if user_mode == "Field Worker"
-                        else f"\n{t('customer_mode_note')}"
-                    )
+                    mode_note = f"\n{t(user_mode + '_mode_note')}"
 
                     language_instruction = t("assistant_language_instruction")
 
@@ -846,10 +914,17 @@ if prompt:
                             + lines
                         )
 
+                    simple_replies_note = (
+                        f"\n{t('simple_replies_instruction')}"
+                        if simple_replies_enabled
+                        else ""
+                    )
+
                     config = types.GenerateContentConfig(
                         system_instruction=filled_system_instruction
                         + f"\n{t('territory_note', territory=territory)}"
                         + mode_note
+                        + simple_replies_note
                         + f"\n{language_instruction}"
                         + rag_context,
                         temperature=0.7,
