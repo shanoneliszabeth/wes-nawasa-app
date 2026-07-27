@@ -13,4 +13,5 @@ Deployment (Streamlit Cloud):
 
 1. Push this repo to GitHub.
 2. On https://share.streamlit.io, sign in with GitHub and create a new app pointing to this repo and `wes_nawasa_app.py`.
-3. In app Settings → Secrets add your Gemini (Google) API key as `GOOGLE_API_KEY`.
+
+No Secrets configuration is needed — each visitor enters their own Gemini API key in the app's sidebar, so there is no shared `GOOGLE_API_KEY` to set.

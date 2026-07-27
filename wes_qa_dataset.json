@@ -41,23 +41,23 @@
   },
   {
     "question": "How can I pay my water bill?",
-    "answer": "You can pay at any NAWASA office, through Republic Bank or Grenada Co-operative Bank, via online banking, or through SurePay."
+    "answer": "You can pay in cash at the Main Office (The Carenage), Grenville, or Gouyave sub-offices; drop a cheque at the Main Office, Grenville, or Dusty Highway cheque boxes; pay via online banking through Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean; or use a payment center such as Grenada Co-operative Bank, Western Union, RBTT Bank, or River Sallee Co-operative Credit Union."
   },
   {
     "question": "Can I pay my NAWASA bill at a bank?",
-    "answer": "Yes, both Republic Bank and Grenada Co-operative Bank accept NAWASA bill payments."
+    "answer": "Yes — online banking payments are accepted through Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean."
   },
   {
     "question": "Is there an online payment option?",
-    "answer": "Yes, you can pay your NAWASA bill through online banking or SurePay."
+    "answer": "Yes, you can pay your NAWASA bill through online banking with Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean."
   },
   {
-    "question": "What is SurePay?",
-    "answer": "SurePay is one of the electronic payment channels NAWASA accepts for bill payments."
+    "question": "Can I pay my bill at a payment center?",
+    "answer": "Yes, payment centers include Grenada Co-operative Bank, Western Union, RBTT Bank, and River Sallee Co-operative Credit Union."
   },
   {
     "question": "Do I have to visit a NAWASA office to pay my bill?",
-    "answer": "No, you can also pay through participating banks, online banking, or SurePay without visiting an office."
+    "answer": "No, you can also pay through online banking, a payment center (Western Union, RBTT Bank, River Sallee Co-operative Credit Union, or Grenada Co-operative Bank), or drop a cheque in one of the cheque boxes at the Main Office, Grenville, or Dusty Highway."
   },
   {
     "question": "What territories can I select in this chatbot?",
@@ -117,11 +117,11 @@
   },
   {
     "question": "Which bank can I use to pay my water bill?",
-    "answer": "You can use Republic Bank or Grenada Co-operative Bank to pay your NAWASA bill."
+    "answer": "You can pay through online banking with Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean."
   },
   {
     "question": "Do you accept online banking payments?",
-    "answer": "Yes, online banking is one of the accepted payment methods for NAWASA bills."
+    "answer": "Yes, online banking is accepted through Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean."
   },
   {
     "question": "What areas in Grenada have NAWASA sub-offices?",
@@ -145,7 +145,7 @@
   },
   {
     "question": "What are NAWASA's payment options in one list?",
-    "answer": "You can pay at NAWASA offices, through Republic Bank, Grenada Co-operative Bank, online banking, or SurePay."
+    "answer": "You can pay in cash at the Main Office, Grenville, or Gouyave sub-offices; by cheque box at the Main Office, Grenville, or Dusty Highway; via online banking (Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean); or at a payment center (Grenada Co-operative Bank, Western Union, RBTT Bank, or River Sallee Co-operative Credit Union)."
   },
   {
     "question": "Who provides water services in Grenada?",
@@ -181,7 +181,7 @@
   },
   {
     "question": "Does NAWASA offer a mobile app for payments?",
-    "answer": "The listed payment options are NAWASA offices, banks, online banking, and SurePay; no separate mobile app is mentioned."
+    "answer": "No separate mobile app is mentioned — payment options are cash at NAWASA offices, cheque boxes, online banking, and payment centers."
   },
   {
     "question": "I moved to a new home, how do I set up water service?",
@@ -193,7 +193,7 @@
   },
   {
     "question": "Can businesses use the same payment options as households?",
-    "answer": "Yes, the payment options — NAWASA offices, banks, online banking, and SurePay — are available to both households and businesses."
+    "answer": "Yes, the same payment options — cash, cheque boxes, online banking, and payment centers — are available to both households and businesses."
   },
   {
     "question": "What should I do if I smell sewage near my home?",
@@ -205,7 +205,7 @@
   },
   {
     "question": "Can I get help in French or another language?",
-    "answer": "This chatbot responds in English; for assistance in another language, please contact NAWASA directly at 440-2155."
+    "answer": "Yes — use the language selector in the sidebar to switch between English, Spanish, French, Kreyòl, and Chinese."
   },
   {
     "question": "What is W.E.S.?",
