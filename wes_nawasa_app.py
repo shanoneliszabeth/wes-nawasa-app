@@ -10,29 +10,30 @@ Serves two audiences:
 Run with:
     streamlit run wes_nawasa_app.py
 
-IMPORTANT: Set your Gemini API key via the sidebar input, or by exporting
-it as an environment variable before launch:
-    export GEMINI_API_KEY="your-key-here"
-Never hardcode API keys directly in source files.
+Every visitor provides their own Gemini API key in the sidebar — this app
+does not use a shared key or Streamlit Secrets, so one visitor's testing
+can't exhaust another visitor's quota.
 """
 
 import os
+import random
+import string
 import base64
 from pathlib import Path
 import streamlit as st
 from google import genai
 from google.genai import types
 
+# Only languages with a COMPLETE translation table below are offered.
+# Adding a language to this list without a matching TRANSLATIONS entry
+# used to crash the app (KeyError) — t() is now defensive against that
+# too, but keep this list and TRANSLATIONS in sync as you add languages.
 LANGUAGES = [
     "English",
     "Spanish",
     "French",
     "Kreyòl",
     "Chinese",
-    "Português",
-    "Hindi",
-    "Arabic",
-    "Bengali",
 ]
 
 TRANSLATIONS = {
@@ -83,6 +84,7 @@ TRANSLATIONS = {
         "faq_deposit_reconnection": "Deposits: Domestic $240, Non-domestic $340. Reconnection fees: Domestic $75, Non-domestic $150.",
         "faq_billing_terms": "Bills are due within 30 days of issue. Late amounts accrue 1% interest per month, and service may be discontinued after 30+ days overdue.",
         "faq_leak_check": "To self-check for a leak: turn off all taps and appliances, watch the meter. If it keeps moving, report a leak; if it stops, the issue is likely an estimated bill, an outdoor tap, or a meter problem.",
+        "faq_payment_channels": "Cash: Main Office (The Carenage), Grenville, or Gouyave sub-offices. Cheque boxes: Main Office, Grenville, or Dusty Highway. Online banking: Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean. Payment centers: Grenada Co-operative Bank, Western Union, RBTT Bank, or River Sallee Co-operative Credit Union.",
         "faq_apply_new_connection_header": "How do I apply for a new service connection?",
         "faq_connection_header": "How much does a new service connection cost?",
         "faq_contact_header": "How can I contact NAWASA for help?",
@@ -91,6 +93,7 @@ TRANSLATIONS = {
         "faq_leak_header": "How do I check whether I have a leak?",
         "faq_high_consumption_header": "Why is my water usage high and how can I check for leaks?",
         "faq_fee_conflict_header": "What if published connection fees conflict?",
+        "faq_payment_channels_header": "Where can I pay my bill?",
         "quota_error": (
             "I'm getting more requests than I can handle right now (we've hit today's free usage limit). "
             "Please try again in a little while, or contact NAWASA directly at 440-2155 for immediate help. "
@@ -269,9 +272,17 @@ TRANSLATIONS = {
 }
 
 
+language = "English"
+
 def t(key: str, **kwargs) -> str:
-    text = TRANSLATIONS[language].get(key, TRANSLATIONS["English"].get(key, key))
+    # FIX (bug #1): defensive against a language in LANGUAGES that has no
+    # matching TRANSLATIONS entry — falls back to English instead of a
+    # hard KeyError crash. Also guards the inner key lookup the same way.
+    selected_language = globals().get("language", "English")
+    lang_table = TRANSLATIONS.get(selected_language, TRANSLATIONS["English"])
+    text = lang_table.get(key, TRANSLATIONS["English"].get(key, key))
     return text.format(**kwargs)
+
 
 # ---------------------------------------------------------------------------
 # Page setup
@@ -370,7 +381,13 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-SYSTEM_INSTRUCTION = """
+# FIX (bug #3): restored the real, live-verified payment channels instead
+# of the generic placeholder list, and removed "SurePay" — it was never
+# confirmed on NAWASA's actual site and shouldn't be stated as fact.
+# FIX (bug #2): {ref_code} stays as a template placeholder here; it is
+# filled in via .format(ref_code=...) at call time, below, instead of
+# being silently concatenated as literal, unformatted text.
+SYSTEM_INSTRUCTION_TEMPLATE = """
 You are W.E.S., the official virtual assistant for the National Water & Sewerage Authority (NAWASA), serving Grenada, Carriacou, and Petite Martinique.
 
 You serve two kinds of users:
@@ -381,48 +398,33 @@ Fact Sheet (ground truth — never state facts beyond this list):
 - NAWASA provides water and sewerage services across Grenada, Carriacou, and Petite Martinique.
 - Main Headquarters: The Carenage, St. George's.
 - Key Sub-Offices: Grenville (St. Andrew), Gouyave (St. John), Dusty Highway (Grand Anse), and Hillsborough (Carriacou).
-- Contact Hotline: Call 440-2155 or emergency 911 / 440-2155 for main line.
-- WhatsApp: 405 5245, 459 6064, 405 9143.
+- Contact Hotline: (473) 440-2155. WhatsApp: 405 5245 / 459 6064 / 405 9143. Emergency: 911 or 440-2155.
 - Emergency Water Leaks: Direct customers to report leaks immediately via the hotline, WhatsApp, or the website portal.
-- Payment Options: NAWASA offices, local banks (Republic Bank, Grenada Co-operative Bank), online banking, or SurePay.
-- New service connections require a completed application under NAWASA's Requirements for Private Water Service and the Terms and Conditions for Water Service.
-- New connection costs depend on the pipe size:
-  - $75 for a ½" main
-  - $125 for a ¾" main
-  - $175 for a 1" main
-  - $420 for a 1¼"–2" main
-  - $1,000 for a 4" main
-  Additional variable costs may include transportation, pipes/fittings, and VAT.
-- There is also an alternative published set of connection fees from the official 2010 gazetted regulation:
-  - $80 for a ½" main
-  - $120 for a ¾" main
-  - $175 for a 1" main
-  - $420 for a 1½"–2" main
-  - $1,000 for a 2½"–3" main
-  - $1,200 for a 4" main
-  - $1,500 for over 4"
-- A 2024 news report suggests a revised service charge range of EC$340–$8,000 for new/reconnecting customers; this is unverified and must be checked with NAWASA staff.
-- Service Charge (deposit, per 2010 regulation): Domestic buildings $240; Non-domestic $340.
+- Bill Payment Channels: Cash at Main Office (The Carenage), Grenville, or Gouyave sub-offices; cheque boxes at Main Office, Grenville, or Dusty Highway; online banking via Scotia Bank, Republic Bank, Grenada Co-operative Bank, or CIBC FirstCaribbean; payment centers at Grenada Co-operative Bank, Western Union, RBTT Bank, or River Sallee Co-operative Credit Union.
+- New Connection Fees: TWO different published figures exist and have NOT been reconciled — always present both and recommend confirming with the hotline: (a) per the NAWASA FAQ page: ½"=$75, ¾"=$125, 1"=$175, 1¼"–2"=$420, 4"=$1,000; (b) per the official 2010 gazetted regulation: ½"=$80, ¾"=$120, 1"=$175, 1½"–2"=$420, 2½"–3"=$1,000, 4"=$1,200, over 4"=$1,500. There is also an unverified 2024 news report suggesting a revised service charge of EC$340–$8,000 for new/reconnecting customers — mention this exists but is NOT confirmed, and must be checked with staff.
+- Service Charge (deposit, per 2010 regulation): Domestic buildings $240; Non-domestic $340. (Note: possibly superseded — see above.)
 - Reconnection Fee (per 2010 regulation): Domestic $75; Non-domestic $150.
 - Billing Terms: Bills are due within 30 days of issue. Amounts unpaid past 30 days accrue 1% interest per month, and NAWASA may discontinue service without further notice once 30+ days overdue.
 - Disconnection Threshold (per FAQ): minimum $50 in arrears, at least 30 days overdue.
-- Estimated bills are calculated from the average of the customer's last three months' consumption.
+- Estimated Bills: calculated using the average of the customer's last three months' consumption.
 - Sewerage Rate Formula: Domestic = one third of the monthly water rate; Non-domestic = two thirds of the monthly water rate.
 
-Leak self-diagnosis:
-1. Ask the customer to turn off every tap and water-using appliance on the property.
+Leak self-diagnosis (walk the customer through this instead of just deflecting to the hotline):
+1. Ask them to turn off every tap and water-using appliance in the property.
 2. Ask them to watch the water meter dial.
-3. If the dial keeps moving with everything off, that indicates a leak — advise reporting it via hotline, WhatsApp, or the website portal.
-4. If the dial stops, the issue is more likely an estimated bill, an unsecured/outdoor tap, or a meter problem — recommend contacting the hotline for investigation.
+3. If the dial is still turning with everything off, that confirms a leak — tell them to report it via the hotline, WhatsApp, or the website portal.
+4. If the dial is still, the high bill is more likely an estimated bill, an unsecured/accessible outdoor tap, or a meter issue — suggest they contact the hotline to investigate further.
 
 Operational rules:
-- You do NOT have access to any individual customer's live account balance, bill amount, or outage status — you are not connected to NAWASA's billing or operations systems. Be honest about this and direct customers to the hotline (440-2155) for account-specific or real-time information.
+- You do NOT have access to any individual customer's live account balance, bill amount, or real-time outage status — you are not connected to NAWASA's billing or operations systems. Be honest about this and direct customers to the hotline for account-specific or real-time information.
 - You do NOT process payments, dispatch repair crews, or make operational decisions. You inform; NAWASA staff act.
-- When published facts conflict (like the two connection-fee tables above), state both clearly with their source rather than picking one.
+- When published facts conflict (like the two connection-fee tables above), state both clearly with their source rather than picking one — never silently average or guess which is current.
 - If a user uploads a photo of a water meter or tank gauge, read the numeric value as precisely as you can and state it clearly, along with a brief note that the reading should be confirmed against the physical meter before logging.
 - Always maintain a warm, helpful, and respectful Caribbean tone.
 - Stay strictly within NAWASA water/sewerage topics; politely redirect anything unrelated.
-- When a request needs a human (an account-specific question, a complaint, an emergency, or anything outside what you can confidently answer), soften the handoff, tell the user to contact the hotline ((473) 440-2155) or WhatsApp (405 5245 / 459 6064 / 405 9143), and give them their session reference code: {ref_code}
+
+Escalation:
+- When a request needs a human (an account-specific question, a complaint, an emergency, or anything outside what you can confidently answer), soften the handoff, tell the user to contact the hotline ((473) 440-2155) or WhatsApp (405 5245 / 459 6064 / 405 9143), and give them their session reference code so staff can find their conversation: {ref_code}
 """
 
 # ---------------------------------------------------------------------------
@@ -434,8 +436,18 @@ with st.sidebar.expander(TRANSLATIONS["English"]["sidebar_language"], expanded=F
 
 st.sidebar.title(t("sidebar_title"))
 
-# Do NOT use Streamlit Secrets or environment variables for the Gemini key.
-# Every user must provide their own API key in the sidebar.
+# FIX (bug #2, part A): generate one reference code per browser session.
+# This was missing entirely in the pasted version — st.session_state.ref_code
+# was referenced in the quota-error fallback but never actually created,
+# so it always silently showed the placeholder "WES-XXXXXX".
+if "ref_code" not in st.session_state:
+    st.session_state.ref_code = "WES-" + "".join(
+        random.choices(string.ascii_uppercase + string.digits, k=6)
+    )
+
+# Every visitor provides their own Gemini API key — no shared key or
+# Streamlit Secrets fallback, so one visitor's testing can't burn through
+# another visitor's daily quota.
 api_key_input = st.sidebar.text_input(
     t("sidebar_api_key_label"),
     value="",
@@ -447,8 +459,10 @@ user_mode_label = st.sidebar.radio(
     t("sidebar_i_am_a"),
     [t("customer"), t("field_worker")],
 )
-user_mode = "Field Worker" if user_mode_label == t("field_worker") else "Customer"
-mode_label = t("field_worker") if user_mode == "Field Worker" else t("customer")
+user_mode = "Field Worker" if user_mode_label == t(
+    "field_worker") else "Customer"
+mode_label = t(
+    "field_worker") if user_mode == "Field Worker" else t("customer")
 
 territory = st.sidebar.selectbox(
     t("sidebar_select_territory"),
@@ -461,23 +475,21 @@ if st.sidebar.button(t("sidebar_clear_chat")):
 
 st.sidebar.caption("☎ Hotline: 440-2155")
 st.sidebar.caption("📱 WhatsApp: 405 5245 / 459 6064 / 405 9143")
-st.sidebar.caption("ℹ️ Messages and photos are processed by Google's Gemini API (cloud-based, outside Grenada). Do not share sensitive personal or payment details in chat.")
+st.sidebar.caption(
+    f"🔖 Your reference code: **{st.session_state.ref_code}** — quote this if transferred to NAWASA staff.")
+st.sidebar.caption(
+    "ℹ️ Messages and photos are processed by Google's Gemini API (cloud-based, outside Grenada). Do not share sensitive personal or payment details in chat.")
 
 # ---------------------------------------------------------------------------
 # App Title & Layout
 # ---------------------------------------------------------------------------
-app_dir = Path(__file__).resolve().parent
-logo_path = app_dir / "logo.png"
-# Ensure the logo is loaded from the app directory and displayed at the top center.
 logo_exists = logo_path.exists()
 
 if logo_exists:
-    logo_bytes = logo_path.read_bytes()
-    encoded_logo = base64.b64encode(logo_bytes).decode()
     st.markdown(
         f"""
         <div style="width:100%; display:flex; justify-content:center; align-items:center; margin-bottom:1rem;">
-            <img src="data:image/png;base64,{encoded_logo}" width="110" style="display:block; margin:0 auto;" />
+            <img src="data:image/png;base64,{logo_base64}" width="110" style="display:block; margin:0 auto;" />
         </div>
         """,
         unsafe_allow_html=True,
@@ -519,6 +531,9 @@ with st.expander(t("faq_title"), expanded=True):
 
     with st.expander(t("faq_leak_header")):
         st.write(t("faq_leak_check"))
+
+    with st.expander(t("faq_payment_channels_header")):
+        st.write(t("faq_payment_channels"))
 
 if not api_key_input:
     st.info(t("api_key_required"), icon="🔑")
@@ -573,70 +588,78 @@ if prompt:
             st.image(image_bytes, width=250)
 
     with st.chat_message("assistant"):
-            with st.spinner(t("thinking_spinner")):
-                try:
-                    client = genai.Client(api_key=api_key_input)
+        with st.spinner(t("thinking_spinner")):
+            try:
+                client = genai.Client(api_key=api_key_input)
 
-                    # Build full chat history for Gemini so it has conversational memory
-                    contents = []
-                    for m in st.session_state.messages:
-                        role = "user" if m["role"] == "user" else "model"
-                        parts = [types.Part.from_text(text=m["content"])]
-                        if m.get("image") and role == "user":
-                            parts.append(
-                                types.Part.from_bytes(
-                                    data=m["image"], mime_type=image_mime or "image/jpeg")
-                            )
-                        contents.append(types.Content(role=role, parts=parts))
+                # Build full chat history for Gemini so it has conversational memory
+                contents = []
+                for m in st.session_state.messages:
+                    role = "user" if m["role"] == "user" else "model"
+                    parts = [types.Part.from_text(text=m["content"])]
+                    if m.get("image") and role == "user":
+                        parts.append(
+                            types.Part.from_bytes(
+                                data=m["image"], mime_type=image_mime or "image/jpeg")
+                        )
+                    contents.append(types.Content(role=role, parts=parts))
 
-                    mode_note = (
-                        f"\n{t('field_worker_mode_note')}"
-                        if user_mode == "Field Worker"
-                        else f"\n{t('customer_mode_note')}"
-                    )
+                mode_note = (
+                    f"\n{t('field_worker_mode_note')}"
+                    if user_mode == "Field Worker"
+                    else f"\n{t('customer_mode_note')}"
+                )
 
-                    language_instruction = t("assistant_language_instruction")
+                language_instruction = t("assistant_language_instruction")
 
-                    config = types.GenerateContentConfig(
-                        system_instruction=SYSTEM_INSTRUCTION
-                        + f"\n{t('territory_note', territory=territory)}"
-                        + mode_note
-                        + f"\n{language_instruction}",
-                        temperature=0.7,
-                    )
+                # FIX (bug #2, part B): .format(ref_code=...) actually fills
+                # in the real per-session code now, instead of the literal
+                # "{ref_code}" text leaking straight into Gemini's instructions.
+                filled_system_instruction = SYSTEM_INSTRUCTION_TEMPLATE.format(
+                    ref_code=st.session_state.ref_code
+                )
 
-                    response = client.models.generate_content(
-                        model="gemini-flash-latest",
-                        contents=contents,
-                        config=config,
-                    )
+                config = types.GenerateContentConfig(
+                    system_instruction=filled_system_instruction
+                    + f"\n{t('territory_note', territory=territory)}"
+                    + mode_note
+                    + f"\n{language_instruction}",
+                    temperature=0.7,
+                )
 
-                    bot_reply = response.text
-                    st.markdown(bot_reply)
-                    st.session_state.messages.append(
-                        {"role": "assistant", "content": bot_reply})
+                response = client.models.generate_content(
+                    model="gemini-flash-latest",
+                    contents=contents,
+                    config=config,
+                )
 
-                except Exception as e:
-                    error_message = str(e)
+                bot_reply = response.text
+                st.markdown(bot_reply)
+                st.session_state.messages.append(
+                    {"role": "assistant", "content": bot_reply})
+
+            except Exception as e:
+                error_message = str(e)
+                if hasattr(e, "error") and isinstance(e.error, dict):
+                    err = e.error
+                    error_message = err.get("message", error_message)
+
+                is_quota_error = (
+                    "RESOURCE_EXHAUSTED" in error_message
+                    or "quota" in error_message.lower()
+                    or "limit" in error_message.lower()
+                )
+
+                if is_quota_error:
+                    st.error(t("quota_error", ref_code=st.session_state.ref_code))
+                else:
+                    retry_hint = ""
                     if hasattr(e, "error") and isinstance(e.error, dict):
-                        err = e.error
-                        error_message = err.get("message", error_message)
-
-                    is_quota_error = (
-                        "RESOURCE_EXHAUSTED" in error_message
-                        or "quota" in error_message.lower()
-                        or "limit" in error_message.lower()
-                    )
-
-                    if is_quota_error:
-                        ref_code = st.session_state.get("ref_code", "WES-XXXXXX")
-                        st.error(t("quota_error", ref_code=ref_code))
-                    else:
-                        retry_hint = ""
-                        if hasattr(e, "error") and isinstance(e.error, dict):
-                            for detail in e.error.get("details", []):
-                                if isinstance(detail, dict) and detail.get("@type", "").endswith("RetryInfo"):
-                                    retry_delay = detail.get("retryDelay")
-                                    if retry_delay:
-                                        retry_hint = t("retry_hint", retry_delay=retry_delay)
-                        st.error(t("gemini_error", error=error_message, retry_hint=retry_hint))
+                        for detail in e.error.get("details", []):
+                            if isinstance(detail, dict) and detail.get("@type", "").endswith("RetryInfo"):
+                                retry_delay = detail.get("retryDelay")
+                                if retry_delay:
+                                    retry_hint = t(
+                                        "retry_hint", retry_delay=retry_delay)
+                    st.error(t("gemini_error", error=error_message,
+                             retry_hint=retry_hint))
