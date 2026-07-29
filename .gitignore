@@ -16,3 +16,6 @@ build/
 
 # IDEs
 .vscode/
+
+# wes-api is its own separate git repository, not part of this one
+/wes-api/
